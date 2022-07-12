@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Welcome to Grails</title>
+    <title>Welcome to UpdateAssistant</title>
 </head>
 <body>
 <content tag="nav">
@@ -52,7 +52,7 @@
 <div id="content" role="main">
     <div class="container">
         <section class="row colset-2-its">
-            <h1>Welcome to Grails</h1>
+            <h1>Welcome to Update Assistant</h1>
 
             <p>
                 Congratulations, you have successfully started your first Grails application! At the moment
