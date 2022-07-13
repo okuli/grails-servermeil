@@ -3,70 +3,70 @@ package updateassistant
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class TypController {
+class AddressController {
 
-    TypService typService
+    AddressService addressService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond typService.list(params), model:[typCount: typService.count()]
+        respond addressService.list(params), model:[addressCount: addressService.count()]
     }
 
     def show(Long id) {
-        respond typService.get(id)
+        respond addressService.get(id)
     }
 
     def create() {
-        respond new Typ(params)
+        respond new Address(params)
     }
 
-    def save(Typ typ) {
-        if (typ == null) {
+    def save(Address address) {
+        if (address == null) {
             notFound()
             return
         }
 
         try {
-            typService.save(typ)
+            addressService.save(address)
         } catch (ValidationException e) {
-            respond typ.errors, view:'create'
+            respond address.errors, view:'create'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'typ.label', default: 'Typ'), typ.id])
-                redirect typ
+                flash.message = message(code: 'default.created.message', args: [message(code: 'address.label', default: 'Address'), address.id])
+                redirect address
             }
-            '*' { respond typ, [status: CREATED] }
+            '*' { respond address, [status: CREATED] }
         }
     }
 
     def edit(Long id) {
-        respond typService.get(id)
+        respond addressService.get(id)
     }
 
-    def update(Typ typ) {
-        if (typ == null) {
+    def update(Address address) {
+        if (address == null) {
             notFound()
             return
         }
 
         try {
-            typService.save(typ)
+            addressService.save(address)
         } catch (ValidationException e) {
-            respond typ.errors, view:'edit'
+            respond address.errors, view:'edit'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'typ.label', default: 'Typ'), typ.id])
-                redirect typ
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'address.label', default: 'Address'), address.id])
+                redirect address
             }
-            '*'{ respond typ, [status: OK] }
+            '*'{ respond address, [status: OK] }
         }
     }
 
@@ -76,11 +76,11 @@ class TypController {
             return
         }
 
-        typService.delete(id)
+        addressService.delete(id)
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'typ.label', default: 'Typ'), id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'address.label', default: 'Address'), id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -90,7 +90,7 @@ class TypController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'typ.label', default: 'Typ'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'address.label', default: 'Address'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

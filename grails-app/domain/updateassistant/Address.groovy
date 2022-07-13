@@ -1,6 +1,6 @@
 package updateassistant
 
-class Adress {
+class Address {
     String name
     String street
     String zipcode

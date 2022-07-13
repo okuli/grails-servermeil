@@ -5,7 +5,7 @@ import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
 import spock.lang.*
 
-class AdressControllerSpec extends Specification implements ControllerUnitTest<AdressController>, DomainUnitTest<Adress> {
+class AdressControllerSpec extends Specification implements ControllerUnitTest<AddressController>, DomainUnitTest<Address> {
 
     def populateValidParams(params) {
         assert params != null
@@ -17,7 +17,7 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the index action returns the correct model"() {
         given:
-        controller.adressService = Mock(AdressService) {
+        controller.adressService = Mock(AddressService) {
             1 * list(_) >> []
             1 * count() >> 0
         }
@@ -51,8 +51,8 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the save action correctly persists"() {
         given:
-        controller.adressService = Mock(AdressService) {
-            1 * save(_ as Adress)
+        controller.adressService = Mock(AddressService) {
+            1 * save(_ as Address)
         }
 
         when:"The save action is executed with a valid instance"
@@ -60,7 +60,7 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
         populateValidParams(params)
-        def adress = new Adress(params)
+        def adress = new Address(params)
         adress.id = 1
 
         controller.save(adress)
@@ -72,8 +72,8 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the save action with an invalid instance"() {
         given:
-        controller.adressService = Mock(AdressService) {
-            1 * save(_ as Adress) >> { Adress adress ->
+        controller.adressService = Mock(AddressService) {
+            1 * save(_ as Address) >> { Address adress ->
                 throw new ValidationException("Invalid instance", adress.errors)
             }
         }
@@ -81,7 +81,7 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def adress = new Adress()
+        def adress = new Address()
         controller.save(adress)
 
         then:"The create view is rendered again with the correct model"
@@ -91,7 +91,7 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the show action with a null id"() {
         given:
-        controller.adressService = Mock(AdressService) {
+        controller.adressService = Mock(AddressService) {
             1 * get(null) >> null
         }
 
@@ -104,20 +104,20 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the show action with a valid id"() {
         given:
-        controller.adressService = Mock(AdressService) {
-            1 * get(2) >> new Adress()
+        controller.adressService = Mock(AddressService) {
+            1 * get(2) >> new Address()
         }
 
         when:"A domain instance is passed to the show action"
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
-        model.adress instanceof Adress
+        model.adress instanceof Address
     }
 
     void "Test the edit action with a null id"() {
         given:
-        controller.adressService = Mock(AdressService) {
+        controller.adressService = Mock(AddressService) {
             1 * get(null) >> null
         }
 
@@ -130,15 +130,15 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the edit action with a valid id"() {
         given:
-        controller.adressService = Mock(AdressService) {
-            1 * get(2) >> new Adress()
+        controller.adressService = Mock(AddressService) {
+            1 * get(2) >> new Address()
         }
 
         when:"A domain instance is passed to the show action"
         controller.edit(2)
 
         then:"A model is populated containing the domain instance"
-        model.adress instanceof Adress
+        model.adress instanceof Address
     }
 
 
@@ -155,8 +155,8 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the update action correctly persists"() {
         given:
-        controller.adressService = Mock(AdressService) {
-            1 * save(_ as Adress)
+        controller.adressService = Mock(AddressService) {
+            1 * save(_ as Address)
         }
 
         when:"The save action is executed with a valid instance"
@@ -164,7 +164,7 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
         populateValidParams(params)
-        def adress = new Adress(params)
+        def adress = new Address(params)
         adress.id = 1
 
         controller.update(adress)
@@ -176,8 +176,8 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the update action with an invalid instance"() {
         given:
-        controller.adressService = Mock(AdressService) {
-            1 * save(_ as Adress) >> { Adress adress ->
+        controller.adressService = Mock(AddressService) {
+            1 * save(_ as Address) >> { Address adress ->
                 throw new ValidationException("Invalid instance", adress.errors)
             }
         }
@@ -185,7 +185,7 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
-        controller.update(new Adress())
+        controller.update(new Address())
 
         then:"The edit view is rendered again with the correct model"
         model.adress != null
@@ -205,7 +205,7 @@ class AdressControllerSpec extends Specification implements ControllerUnitTest<A
 
     void "Test the delete action with an instance"() {
         given:
-        controller.adressService = Mock(AdressService) {
+        controller.adressService = Mock(AddressService) {
             1 * delete(2)
         }
 

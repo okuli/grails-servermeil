@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory
 @Rollback
 class TypServiceSpec extends Specification {
 
-    TypService typService
+    TypesService typService
     SessionFactory sessionFactory
 
     private Long setupData() {
@@ -34,7 +34,7 @@ class TypServiceSpec extends Specification {
         setupData()
 
         when:
-        List<Typ> typList = typService.list(max: 2, offset: 2)
+        List<Types> typList = typService.list(max: 2, offset: 2)
 
         then:
         typList.size() == 2
@@ -65,7 +65,7 @@ class TypServiceSpec extends Specification {
     void "test save"() {
         when:
         assert false, "TODO: Provide a valid instance to save"
-        Typ typ = new Typ()
+        Types typ = new Types()
         typService.save(typ)
 
         then:

@@ -4,7 +4,7 @@ class Device {
 
     Customer customer
     Location location
-    Typ typeOfDevice
+    Types typeOfDevice
     Manufacturer manufacturer
     OperatingSystem operatingSystem
     String OSVersion

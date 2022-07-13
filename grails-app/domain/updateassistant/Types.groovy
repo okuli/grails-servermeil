@@ -1,6 +1,6 @@
 package updateassistant
 
-class Typ {
+class Types {
 
     String name
 

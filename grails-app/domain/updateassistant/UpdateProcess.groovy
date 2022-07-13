@@ -7,7 +7,7 @@ class UpdateProcess {
     Date checkDate
     Date updateDate
     String lastVersion
-    String lastetVersion
+    String currentVersion
     Boolean updateSuccess
 
     static constraints = {

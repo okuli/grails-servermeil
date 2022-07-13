@@ -3,7 +3,7 @@ package updateassistant
 class Datacenter {
 
     String name
-    Adress adresses
+    Address adresses
 
 
     static constraints = {

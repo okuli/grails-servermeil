@@ -3,70 +3,70 @@ package updateassistant
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class AdressController {
+class TypesController {
 
-    AdressService adressService
+    TypesService typesService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond adressService.list(params), model:[adressCount: adressService.count()]
+        respond typesService.list(params), model:[typCount: typesService.count()]
     }
 
     def show(Long id) {
-        respond adressService.get(id)
+        respond typesService.get(id)
     }
 
     def create() {
-        respond new Adress(params)
+        respond new Types(params)
     }
 
-    def save(Adress adress) {
-        if (adress == null) {
+    def save(Types types) {
+        if (types == null) {
             notFound()
             return
         }
 
         try {
-            adressService.save(adress)
+            typesService.save(types)
         } catch (ValidationException e) {
-            respond adress.errors, view:'create'
+            respond types.errors, view:'create'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'adress.label', default: 'Adress'), adress.id])
-                redirect adress
+                flash.message = message(code: 'default.created.message', args: [message(code: 'types.label', default: 'Types'), types.id])
+                redirect types
             }
-            '*' { respond adress, [status: CREATED] }
+            '*' { respond types, [status: CREATED] }
         }
     }
 
     def edit(Long id) {
-        respond adressService.get(id)
+        respond typesService.get(id)
     }
 
-    def update(Adress adress) {
-        if (adress == null) {
+    def update(Types types) {
+        if (types == null) {
             notFound()
             return
         }
 
         try {
-            adressService.save(adress)
+            typesService.save(types)
         } catch (ValidationException e) {
-            respond adress.errors, view:'edit'
+            respond types.errors, view:'edit'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'adress.label', default: 'Adress'), adress.id])
-                redirect adress
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'types.label', default: 'Types'), types.id])
+                redirect types
             }
-            '*'{ respond adress, [status: OK] }
+            '*'{ respond types, [status: OK] }
         }
     }
 
@@ -74,13 +74,13 @@ class AdressController {
         if (id == null) {
             notFound()
             return
-        }
 
-        adressService.delete(id)
+        typesService.delete(id)
+    }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'adress.label', default: 'Adress'), id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'types.label', default: 'Types'), id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -90,7 +90,7 @@ class AdressController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'adress.label', default: 'Adress'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'types.label', default: 'Types'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory
 @Rollback
 class AdressServiceSpec extends Specification {
 
-    AdressService adressService
+    AddressService adressService
     SessionFactory sessionFactory
 
     private Long setupData() {
@@ -34,7 +34,7 @@ class AdressServiceSpec extends Specification {
         setupData()
 
         when:
-        List<Adress> adressList = adressService.list(max: 2, offset: 2)
+        List<Address> adressList = adressService.list(max: 2, offset: 2)
 
         then:
         adressList.size() == 2
@@ -65,7 +65,7 @@ class AdressServiceSpec extends Specification {
     void "test save"() {
         when:
         assert false, "TODO: Provide a valid instance to save"
-        Adress adress = new Adress()
+        Address adress = new Address()
         adressService.save(adress)
 
         then:

@@ -5,7 +5,7 @@ import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
 import spock.lang.*
 
-class TypControllerSpec extends Specification implements ControllerUnitTest<TypController>, DomainUnitTest<Typ> {
+class TypControllerSpec extends Specification implements ControllerUnitTest<TypesController>, DomainUnitTest<Types> {
 
     def populateValidParams(params) {
         assert params != null
@@ -17,7 +17,7 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the index action returns the correct model"() {
         given:
-        controller.typService = Mock(TypService) {
+        controller.typService = Mock(TypesService) {
             1 * list(_) >> []
             1 * count() >> 0
         }
@@ -51,8 +51,8 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the save action correctly persists"() {
         given:
-        controller.typService = Mock(TypService) {
-            1 * save(_ as Typ)
+        controller.typService = Mock(TypesService) {
+            1 * save(_ as Types)
         }
 
         when:"The save action is executed with a valid instance"
@@ -60,7 +60,7 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
         populateValidParams(params)
-        def typ = new Typ(params)
+        def typ = new Types(params)
         typ.id = 1
 
         controller.save(typ)
@@ -72,8 +72,8 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the save action with an invalid instance"() {
         given:
-        controller.typService = Mock(TypService) {
-            1 * save(_ as Typ) >> { Typ typ ->
+        controller.typService = Mock(TypesService) {
+            1 * save(_ as Types) >> { Types typ ->
                 throw new ValidationException("Invalid instance", typ.errors)
             }
         }
@@ -81,7 +81,7 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def typ = new Typ()
+        def typ = new Types()
         controller.save(typ)
 
         then:"The create view is rendered again with the correct model"
@@ -91,7 +91,7 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the show action with a null id"() {
         given:
-        controller.typService = Mock(TypService) {
+        controller.typService = Mock(TypesService) {
             1 * get(null) >> null
         }
 
@@ -104,20 +104,20 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the show action with a valid id"() {
         given:
-        controller.typService = Mock(TypService) {
-            1 * get(2) >> new Typ()
+        controller.typService = Mock(TypesService) {
+            1 * get(2) >> new Types()
         }
 
         when:"A domain instance is passed to the show action"
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
-        model.typ instanceof Typ
+        model.typ instanceof Types
     }
 
     void "Test the edit action with a null id"() {
         given:
-        controller.typService = Mock(TypService) {
+        controller.typService = Mock(TypesService) {
             1 * get(null) >> null
         }
 
@@ -130,15 +130,15 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the edit action with a valid id"() {
         given:
-        controller.typService = Mock(TypService) {
-            1 * get(2) >> new Typ()
+        controller.typService = Mock(TypesService) {
+            1 * get(2) >> new Types()
         }
 
         when:"A domain instance is passed to the show action"
         controller.edit(2)
 
         then:"A model is populated containing the domain instance"
-        model.typ instanceof Typ
+        model.typ instanceof Types
     }
 
 
@@ -155,8 +155,8 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the update action correctly persists"() {
         given:
-        controller.typService = Mock(TypService) {
-            1 * save(_ as Typ)
+        controller.typService = Mock(TypesService) {
+            1 * save(_ as Types)
         }
 
         when:"The save action is executed with a valid instance"
@@ -164,7 +164,7 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
         populateValidParams(params)
-        def typ = new Typ(params)
+        def typ = new Types(params)
         typ.id = 1
 
         controller.update(typ)
@@ -176,8 +176,8 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the update action with an invalid instance"() {
         given:
-        controller.typService = Mock(TypService) {
-            1 * save(_ as Typ) >> { Typ typ ->
+        controller.typService = Mock(TypesService) {
+            1 * save(_ as Types) >> { Types typ ->
                 throw new ValidationException("Invalid instance", typ.errors)
             }
         }
@@ -185,7 +185,7 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
-        controller.update(new Typ())
+        controller.update(new Types())
 
         then:"The edit view is rendered again with the correct model"
         model.typ != null
@@ -205,7 +205,7 @@ class TypControllerSpec extends Specification implements ControllerUnitTest<TypC
 
     void "Test the delete action with an instance"() {
         given:
-        controller.typService = Mock(TypService) {
+        controller.typService = Mock(TypesService) {
             1 * delete(2)
         }
 
