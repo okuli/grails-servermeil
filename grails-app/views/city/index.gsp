@@ -6,6 +6,7 @@
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
+    <g:render template="/common/header" />
     <div id="content" role="main">
         <div class="container">
             <section class="row">

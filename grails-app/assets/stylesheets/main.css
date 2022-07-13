@@ -160,10 +160,9 @@ img {
 }
 
 .nav a:focus, .nav a:hover {
-    background-color: #999999;
+    background-color: #6c8fad;
     color: #ffffff;
     outline: none;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
 .no-borderradius .nav a:focus, .no-borderradius .nav a:hover {
