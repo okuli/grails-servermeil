@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: servermeile
+        defaultPackage: updateassistant
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
@@ -114,7 +114,7 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
+            dbCreate: update
             url: jdbc:postgresql://localhost:5432/servermeile_db
 #            url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     test:
