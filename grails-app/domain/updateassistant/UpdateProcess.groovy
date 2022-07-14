@@ -8,7 +8,7 @@ class UpdateProcess {
     Date updateDate
     String lastVersion
     String currentVersion
-    Boolean updateSuccess
+    Boolean updateSuccess = Boolean.FALSE
 
     static constraints = {
     }

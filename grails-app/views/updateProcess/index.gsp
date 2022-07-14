@@ -27,11 +27,11 @@
                     <table>
                     <thead>
                         <tr>
-                            <th class="sortable"><a href="/updateProcess/index?sort=currentversion&amp;max=10&amp;order=asc">Current Version</a></th>
-                            <th class="sortable"><a href="/updateProcess/index?sort=lastversion&amp;max=10&amp;order=asc">Last Version</a></th>
-                            <th class="sortable"><a href="/updateProcess/index?sort=checkdate&amp;max=10&amp;order=asc">Check Date</a></th>
-                            <th class="sortable"><a href="/updateProcess/index?sort=updatedate&amp;max=10&amp;order=asc">Update Date</a></th>
-                            <th class="sortable"><a href="/updateProcess/index?sort=updatesuccess&amp;max=10&amp;order=asc">Update Success</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=currentVersion&amp;max=10&amp;order=asc">Current Version</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=lastVersion&amp;max=10&amp;order=asc">Last Version</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=checkDate&amp;max=10&amp;order=asc">Check Date</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=updateDate&amp;max=10&amp;order=asc">Update Date</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=updateSuccess&amp;max=10&amp;order=asc">Update Success</a></th>
                             <th class="sortable"><a href="/updateProcess/index?sort=device&amp;max=10&amp;order=asc">Device</a></th>
                             <th class="sortable"><a href="/updateProcess/index?sort=contact&amp;max=10&amp;order=asc">Contact</a></th>
                         </tr>

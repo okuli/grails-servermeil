@@ -1,3 +1,5 @@
+<%@ page import="updateassistant.Device"  %>
+<%@ page import="updateassistant.Contact"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +34,42 @@
                     </g:hasErrors>
                     <g:form resource="${this.updateProcess}" method="POST">
                         <fieldset class="form">
-                            <f:all bean="updateProcess"/>
+                            <div class="fieldcontain required">
+                                <label for="">Current Version<span class="required-indicator">*</span></label>
+                                <input type="text" id="currentVersion" name="currentVersion" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                                <label for="">Last Version<span class="required-indicator">*</span></label>
+                                <input type="text" id="lastVersion" name="lastVersion" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">Data Center<span class="required-indicator">*</span></label>
+                               <select id="device" name="device" required="">
+                                    <g:each var="device" in="${Device.list()}">
+                                        <option value="${device.id}">${device.serialnumber}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+                            <div class="fieldcontain required">
+                                 <label for="">Check Date<span class="required-indicator">*</span></label>
+                                 <g:datePicker name="checkDate" precision="day" value="${new Date()}" />
+                            </div>
+                            <div class="fieldcontain">
+                                <label for="">Update Success</label>
+                                <input type="checkbox" id="updateSuccess" name="updateSuccess" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">Data Center<span class="required-indicator">*</span></label>
+                               <select id="contact" name="contact" required="">
+                                    <g:each var="contact" in="${Contact.list()}">
+                                        <option value="${contact.id}">${contact.firstname}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+                            <div class="fieldcontain required">
+                                 <label for="">Check Date<span class="required-indicator">*</span></label>
+                                 <g:datePicker name="updateDate" precision="day" value="${new Date()}" />
+                            </div>
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
