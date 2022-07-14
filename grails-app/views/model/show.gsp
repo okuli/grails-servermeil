@@ -24,7 +24,20 @@
                     <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:display bean="model" />
+                    <ol class="property-list address">
+                        <li class="fieldcontain">
+                            <span id="name-label" class="property-label">Manufacturer</span>
+                            <div class="property-value" aria-labelledby="name-label">${model.manufacturer.name}</div>
+                        </li>
+                        <li class="fieldcontain">
+                            <span id="name-label" class="property-label">Mode Name</span>
+                            <div class="property-value" aria-labelledby="name-label">${model.modeName}</div>
+                        </li>
+                         <li class="fieldcontain">
+                             <span id="name-label" class="property-label">Update URL</span>
+                             <div class="property-value" aria-labelledby="name-label">${model.updateURL}</div>
+                         </li>
+                    </ol>
                     <g:form resource="${this.model}" method="DELETE">
                         <fieldset class="buttons">
                             <g:link class="edit" action="edit" resource="${this.model}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

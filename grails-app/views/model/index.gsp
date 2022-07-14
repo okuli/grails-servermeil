@@ -24,7 +24,24 @@
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${modelList}" />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sortable"><a href="/model/index?sort=manufacturer&amp;max=10&amp;order=asc">Manufacturer</a></th>
+                                <th class="sortable"><a href="/model/index?sort=modeName&amp;max=10&amp;order=asc">Mode Name</a></th>
+                                <th class="sortable"><a href="/model/index?sort=updateURL&amp;max=10&amp;order=asc">Update URL</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <g:each var="model" in="${modelList}">
+                                <tr>
+                                    <td><a href="/manufacturer/show/${model.manufacturer.id}">${model.manufacturer.name}</a></td>
+                                    <td><a href="/model/show/${model.id}">${model.modeName}</a></td>
+                                    <td>${model.updateURL}</td>
+                                </tr>
+                            </g:each>
+                        </tbody>
+                    </table>
 
                     <g:if test="${modelCount > params.int('max')}">
                     <div class="pagination">

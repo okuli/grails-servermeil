@@ -1,3 +1,4 @@
+<%@ page import="updateassistant.City"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +33,30 @@
                     </g:hasErrors>
                     <g:form resource="${this.address}" method="POST">
                         <fieldset class="form">
-                            <f:all bean="address"/>
+                           <!-- <f:all bean="address"/> -->
+                            <div class="fieldcontain required">
+                                <label for="">Name<span class="required-indicator">*</span></label>
+                                <input type="text" id="name" name="name" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">City<span class="required-indicator">*</span></label>
+                               <select id="city" name="city.id" required="">
+                                    <g:each var="city" in="${City.list()}">
+                                        <option value="${city.id}">${city.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Street<span class="required-indicator">*</span></label>
+                                <input type="text" id="street" name="street" required="" placeholder="">
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Zipcode<span class="required-indicator">*</span></label>
+                                <input type="text" id="zipcode" name="zipcode" required="" placeholder="">
+                            </div>
+
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

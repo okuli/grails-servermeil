@@ -24,7 +24,36 @@
                     <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:display bean="updateProcess" />
+                     <ol class="property-list address">
+                           <li class="fieldcontain">
+                               <span id="name-label" class="property-label">Current Version</span>
+                               <div class="property-value" aria-labelledby="name-label">${updateProcess.currentVersion}</div>
+                           </li>
+                           <li class="fieldcontain">
+                               <span id="name-label" class="property-label">Device</span>
+                               <div class="property-value" aria-labelledby="name-label">${updateProcess.device.serialnumber}</div>
+                           </li>
+                           <li class="fieldcontain">
+                              <span id="name-label" class="property-label">Contact</span>
+                              <div class="property-value" aria-labelledby="name-label">${updateProcess.contact.firstname}</div>
+                          </li>
+                          <li class="fieldcontain">
+                                <span id="name-label" class="property-label">Check Date</span>
+                                <div class="property-value" aria-labelledby="name-label">${updateProcess.checkDate}</div>
+                          </li>
+                          <li class="fieldcontain">
+                                  <span id="name-label" class="property-label">Update Date</span>
+                                  <div class="property-value" aria-labelledby="name-label">${updateProcess.updateDate}</div>
+                          </li>
+                          <li class="fieldcontain">
+                                <span id="name-label" class="property-label">Last Version</span>
+                                <div class="property-value" aria-labelledby="name-label">${updateProcess.lastVersion}</div>
+                         </li>
+                         <li class="fieldcontain">
+                                 <span id="name-label" class="property-label">Update Success</span>
+                                 <div class="property-value" aria-labelledby="name-label">${updateProcess.updateSuccess}</div>
+                          </li>
+                     </ol>
                     <g:form resource="${this.updateProcess}" method="DELETE">
                         <fieldset class="buttons">
                             <g:link class="edit" action="edit" resource="${this.updateProcess}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

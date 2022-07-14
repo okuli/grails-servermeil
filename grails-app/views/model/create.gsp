@@ -1,3 +1,4 @@
+<%@ page import="updateassistant.Manufacturer"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +33,25 @@
                     </g:hasErrors>
                     <g:form resource="${this.model}" method="POST">
                         <fieldset class="form">
-                            <f:all bean="model"/>
+                            <div class="fieldcontain required">
+                               <label for="">Manufacturer<span class="required-indicator">*</span></label>
+                               <select id="manufacturer" name="manufacturer" required="">
+                                    <g:each var="manufacturer" in="${Manufacturer.list()}">
+                                        <option value="${manufacturer.id}">${manufacturer.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Mode Name<span class="required-indicator">*</span></label>
+                                <input type="text" id="modeName" name="modeName" required="" placeholder="">
+                            </div>
+
+
+                            <div class="fieldcontain required">
+                                <label for="">Update URL<span class="required-indicator">*</span></label>
+                                <input type="text" id="updateURL" name="updateURL" required="" placeholder="">
+                            </div>
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

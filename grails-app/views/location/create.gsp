@@ -1,3 +1,4 @@
+<%@ page import="updateassistant.Datacenter"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +33,23 @@
                     </g:hasErrors>
                     <g:form resource="${this.location}" method="POST">
                         <fieldset class="form">
-                            <f:all bean="location"/>
+                            <div class="fieldcontain required">
+                                <label for="">Rack Name<span class="required-indicator">*</span></label>
+                                <input type="text" id="rackName" name="rackName" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">Data Center<span class="required-indicator">*</span></label>
+                               <select id="dv" name="dc" required="">
+                                    <g:each var="datacenter" in="${Datacenter.list()}">
+                                        <option value="${datacenter.id}">${datacenter.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Rack Height<span class="required-indicator">*</span></label>
+                                <input type="text" id="rackHeight" name="rackHeight" required="" placeholder="">
+                            </div>
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

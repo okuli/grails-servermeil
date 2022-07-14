@@ -24,8 +24,32 @@
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${updateProcessList}" />
-
+                    <table>
+                    <thead>
+                        <tr>
+                            <th class="sortable"><a href="/updateProcess/index?sort=currentversion&amp;max=10&amp;order=asc">Current Version</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=lastversion&amp;max=10&amp;order=asc">Last Version</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=checkdate&amp;max=10&amp;order=asc">Check Date</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=updatedate&amp;max=10&amp;order=asc">Update Date</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=updatesuccess&amp;max=10&amp;order=asc">Update Success</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=device&amp;max=10&amp;order=asc">Device</a></th>
+                            <th class="sortable"><a href="/updateProcess/index?sort=contact&amp;max=10&amp;order=asc">Contact</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <g:each var="updateProcess" in="${updateProcessList}">
+                            <tr>
+                                <td><a href="/updateProcess/show/${updateProcess.id}">${updateProcess.currentVersion}</a></td>
+                                <td>${updateProcess.lastVersion}</td>
+                                <td>${updateProcess.checkDate}</td>
+                                <td>${updateProcess.updateDate}</td>
+                                <td>${updateProcess.updateSuccess}</td>
+                                <td><a href="/device/show/${updateProcess.device.id}">${updateProcess.device.serialnumber}</a></td>
+                                <td><a href="/contact/show/${updateProcess.contact.id}">${updateProcess.contact.firstname}</a></td>
+                            </tr>
+                        </g:each>
+                    </tbody>
+                    </table>
                     <g:if test="${updateProcessCount > params.int('max')}">
                     <div class="pagination">
                         <g:paginate total="${updateProcessCount ?: 0}" />

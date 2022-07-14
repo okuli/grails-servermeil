@@ -13,6 +13,6 @@ interface AddressService {
 
     void delete(Serializable id)
 
-    Address save(Address adress)
+    Address save(Address address)
 
 }

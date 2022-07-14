@@ -1,3 +1,4 @@
+<%@ page import="updateassistant.Address"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +35,19 @@
                     <g:form resource="${this.datacenter}" method="PUT">
                         <g:hiddenField name="version" value="${this.datacenter?.version}" />
                         <fieldset class="form">
-                            <f:all bean="datacenter"/>
+                            <!-- <f:all bean="datacenter"/> -->
+                            <div class="fieldcontain required">
+                                <label for="">Name<span class="required-indicator">*</span></label>
+                                <input type="text" id="name" name="name" value="${datacenter.name}" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">Address<span class="required-indicator">*</span></label>
+                               <select id="address" name="address.id" required="">
+                                    <g:each var="address" in="${Address.list()}">
+                                        <option value="${address.id}" <g:if test="${datacenter.address.id == address.id}">selected="selected"</g:if> >${address.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
                         </fieldset>
                         <fieldset class="buttons">
                             <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

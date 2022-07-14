@@ -24,7 +24,24 @@
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${locationList}" />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sortable"><a href="/location/index?sort=rackname&amp;max=10&amp;order=asc">Rack Name</a></th>
+                                <th class="sortable"><a href="/location/index?sort=city&amp;max=10&amp;order=asc">Data Center</a></th>
+                                <th class="sortable"><a href="/location/index?sort=street&amp;max=10&amp;order=asc">Rack Height</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <g:each var="location" in="${locationList}">
+                                <tr>
+                                    <td><a href="/location/show/${location.id}">${location.rackName}</a></td>
+                                    <td><a href="/datacenter/show/${location.dc.id}">${location.dc.name}</a></td>
+                                    <td>${location.rackHeight}</td>
+                                </tr>
+                            </g:each>
+                        </tbody>
+                    </table>
 
                     <g:if test="${locationCount > params.int('max')}">
                     <div class="pagination">

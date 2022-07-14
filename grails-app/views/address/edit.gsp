@@ -1,3 +1,4 @@
+<%@ page import="updateassistant.City"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +35,28 @@
                     <g:form resource="${this.address}" method="PUT">
                         <g:hiddenField name="version" value="${this.address?.version}" />
                         <fieldset class="form">
-                            <f:all bean="address"/>
+                            <div class="fieldcontain required">
+                                <label for="">Name<span class="required-indicator">*</span></label>
+                                <input type="text" id="name" value="${address.name}" name="name" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">City<span class="required-indicator">*</span></label>
+                               <select id="city" name="city.id" required="">
+                                    <g:each var="city" in="${City.list()}">
+                                        <option value="${city.id}" <g:if test="${address.city.id == city.id}">selected="selected"</g:if> >${city.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Street<span class="required-indicator">*</span></label>
+                                <input type="text" id="street" value="${address.street}" name="street" required="" placeholder="">
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Zipcode<span class="required-indicator">*</span></label>
+                                <input type="text" id="zipcode" name="zipcode" value="${address.zipcode}" required="" placeholder="">
+                            </div>
                         </fieldset>
                         <fieldset class="buttons">
                             <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

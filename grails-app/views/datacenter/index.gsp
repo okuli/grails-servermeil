@@ -24,7 +24,22 @@
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${datacenterList}" />
+                    <table>
+                    <thead>
+                        <tr>
+                            <th class="sortable"><a href="/datacenter/index?sort=name&amp;max=10&amp;order=asc">Name</a></th>
+                            <th class="sortable"><a href="/datacenter/index?sort=address&amp;max=10&amp;order=asc">Address</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <g:each var="datacenter" in="${datacenterList}">
+                            <tr>
+                                <td><a href="/datacenter/show/${datacenter.id}">${datacenter.name}</a></td>
+                                <td><a href="/address/show/${datacenter.address.id}">${datacenter.address.name}</a></td>
+                            </tr>
+                        </g:each>
+                    </tbody>
+                </table>
 
                     <g:if test="${datacenterCount > params.int('max')}">
                     <div class="pagination">

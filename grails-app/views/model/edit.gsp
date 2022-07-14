@@ -1,3 +1,4 @@
+<%@ page import="updateassistant.Manufacturer"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +35,25 @@
                     <g:form resource="${this.model}" method="PUT">
                         <g:hiddenField name="version" value="${this.model?.version}" />
                         <fieldset class="form">
-                            <f:all bean="model"/>
+                            <div class="fieldcontain required">
+                               <label for="">Manufacturer<span class="required-indicator">*</span></label>
+                               <select id="manufacturer" name="manufacturer" required="">
+                                    <g:each var="manufacturer" in="${Manufacturer.list()}">
+                                        <option value="${manufacturer.id}" <g:if test="${model.manufacturer.id == manufacturer.id}">selected="selected"</g:if> >${manufacturer.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Mode Name<span class="required-indicator">*</span></label>
+                                <input type="text" id="modeName" value="${model.modeName}" name="modeName" required="" placeholder="">
+                            </div>
+
+
+                            <div class="fieldcontain required">
+                                <label for="">Update URL<span class="required-indicator">*</span></label>
+                                <input type="text" id="updateURL" value="${model.updateURL}" name="updateURL" required="" placeholder="">
+                            </div>
                         </fieldset>
                         <fieldset class="buttons">
                             <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

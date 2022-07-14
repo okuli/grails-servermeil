@@ -24,8 +24,26 @@
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${addressList}" />
-
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sortable"><a href="/address/index?sort=name&amp;max=10&amp;order=asc">Name</a></th>
+                                <th class="sortable"><a href="/address/index?sort=city&amp;max=10&amp;order=asc">City</a></th>
+                                <th class="sortable"><a href="/address/index?sort=street&amp;max=10&amp;order=asc">Street</a></th>
+                                <th class="sortable"><a href="/address/index?sort=zipcode&amp;max=10&amp;order=asc">Zipcode</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <g:each var="address" in="${addressList}">
+                                <tr>
+                                    <td><a href="/address/show/${address.id}">${address.name}</a></td>
+                                    <td><a href="/city/show/${address.city.id}">${address.city.name}</a></td>
+                                    <td>${address.street}</td>
+                                    <td>${address.zipcode}</td>
+                                </tr>
+                            </g:each>
+                        </tbody>
+                    </table>
                     <g:if test="${addressCount > params.int('max')}">
                     <div class="pagination">
                         <g:paginate total="${addressCount ?: 0}" />
