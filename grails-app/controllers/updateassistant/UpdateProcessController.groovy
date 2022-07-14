@@ -1,5 +1,6 @@
 package updateassistant
 
+import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 

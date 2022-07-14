@@ -32,8 +32,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <g:each var="datacenter" in="${datacenterList}">
-                            <tr>
+                        <g:each var="datacenter" status="i" in="${datacenterList}">
+                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                 <td><a href="/datacenter/show/${datacenter.id}">${datacenter.name}</a></td>
                                 <td><a href="/address/show/${datacenter.address.id}">${datacenter.address.name}</a></td>
                             </tr>

@@ -4,6 +4,8 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'device.label', default: 'Device')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <g:set var="sortName" value="${request.getParameter("sort")}" />
+        <g:set var="order" value="${request.getParameter("order")}" />
     </head>
     <body>
     <g:render template="/common/header" />
@@ -27,25 +29,27 @@
                     <table>
                     <thead>
                         <tr>
-                            <th class="sortable"><a href="/device/index?sort=manufacturer&amp;max=10&amp;order=asc">Manufacturer</a></th>
-                            <th class="sortable"><a href="/device/index?sort=typeofdevice&amp;max=10&amp;order=asc">Type of Device</a></th>
-                            <th class="sortable"><a href="/device/index?sort=pcontact&amp;max=10&amp;order=asc">P Contact</a></th>
-                            <th class="sortable"><a href="/device/index?sort=location&amp;max=10&amp;order=asc">Location</a></th>
-                            <th class="sortable"><a href="/device/index?sort=serialnumber&amp;max=10&amp;order=asc">Serial Number</a></th>
-                            <th class="sortable"><a href="/device/index?sort=osversion&amp;max=10&amp;order=asc">OS Version</a></th>
-                            <th class="sortable"><a href="/device/index?sort=customer&amp;max=10&amp;order=asc">Customer</a></th>
+                            <th class="sortable ${sortName == 'serialnumber' ? 'sorted':''} ${sortName == 'serialnumber' ? order : ''}"><a href="/device/index?sort=serialnumber&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">Serial Number</a></th>
+                            <th class="sortable">Manufacturer</th>
+                            <th class="sortable">Type of Device</th>
+                            <th class="sortable">P Contact</th>
+                            <th class="sortable">Location</th>
+                            <th class="sortable">OS Version</th>
+                            <th class="sortable">Customer</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <g:each var="device" in="${deviceList}">
-                            <tr>
+                        <g:each var="device" status="i" in="${deviceList}">
+                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                <td><a href="/device/show/${device.id}">${device.serialnumber}</a></td>
                                 <td><a href="/manufacturer/show/${device.manufacturer.id}">${device.manufacturer.name}</a></td>
                                 <td><a href="/types/show/${device.typeOfDevice.id}">${device.typeOfDevice.name}</a></td>
                                 <td><a href="/contact/show/${device.pContact.id}">${device.pContact.firstname}</a></td>
                                 <td><a href="/location/show/${device.location.id}">${device.location.rackName}</a></td>
-                                <td><a href="/device/show/${device.id}">${device.serialnumber}</a></td>
                                 <td>${device.OSVersion}</td>
                                 <td><a href="/customer/show/${device.customer.id}">${device.customer.name}</a></td>
+                                <td><a href="/device/edit/${device.id}"><g:img dir="images" file="/skin/database_edit.png" /></a></td>
                             </tr>
                         </g:each>
                     </tbody>

@@ -33,8 +33,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <g:each var="model" in="${modelList}">
-                                <tr>
+                            <g:each var="model" status="i" in="${modelList}">
+                                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                     <td><a href="/manufacturer/show/${model.manufacturer.id}">${model.manufacturer.name}</a></td>
                                     <td><a href="/model/show/${model.id}">${model.modeName}</a></td>
                                     <td>${model.updateURL}</td>

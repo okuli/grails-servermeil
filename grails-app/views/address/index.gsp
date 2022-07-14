@@ -34,8 +34,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <g:each var="address" in="${addressList}">
-                                <tr>
+                            <g:each var="address" status="i" in="${addressList}">
+                                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                     <td><a href="/address/show/${address.id}">${address.name}</a></td>
                                     <td><a href="/city/show/${address.city.id}">${address.city.name}</a></td>
                                     <td>${address.street}</td>

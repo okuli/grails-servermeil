@@ -43,7 +43,7 @@
                                 <input type="text" id="lastVersion" name="lastVersion" required="" placeholder="">
                             </div>
                             <div class="fieldcontain required">
-                               <label for="">Data Center<span class="required-indicator">*</span></label>
+                               <label for="">Device<span class="required-indicator">*</span></label>
                                <select id="device" name="device" required="">
                                     <g:each var="device" in="${Device.list()}">
                                         <option value="${device.id}">${device.serialnumber}</option>
@@ -59,7 +59,7 @@
                                 <input type="checkbox" id="updateSuccess" name="updateSuccess" placeholder="">
                             </div>
                             <div class="fieldcontain required">
-                               <label for="">Data Center<span class="required-indicator">*</span></label>
+                               <label for="">Contact<span class="required-indicator">*</span></label>
                                <select id="contact" name="contact" required="">
                                     <g:each var="contact" in="${Contact.list()}">
                                         <option value="${contact.id}">${contact.firstname}</option>

@@ -45,7 +45,7 @@
                                 <input type="text" id="lastVersion" value="${updateProcess.lastVersion}" name="lastVersion" required="" placeholder="">
                             </div>
                             <div class="fieldcontain required">
-                               <label for="">Data Center<span class="required-indicator">*</span></label>
+                               <label for="">Device<span class="required-indicator">*</span></label>
                                <select id="device" name="device" required="">
                                     <g:each var="device" in="${Device.list()}">
                                         <option value="${device.id}" <g:if test="${updateProcess.device.id == device.id}">selected="selected"</g:if> >${device.serialnumber}</option>
@@ -61,7 +61,7 @@
                                 <input type="checkbox" id="updateSuccess" <g:if test="${updateProcess.updateSuccess}">Checked="checked"</g:if> name="updateSuccess" placeholder="">
                             </div>
                             <div class="fieldcontain required">
-                               <label for="">Data Center<span class="required-indicator">*</span></label>
+                               <label for="">Contact<span class="required-indicator">*</span></label>
                                <select id="contact" name="contact" required="">
                                     <g:each var="contact" in="${Contact.list()}">
                                         <option value="${contact.id}" <g:if test="${updateProcess.contact.id == contact.id}">selected="selected"</g:if> >${contact.firstname}</option>
