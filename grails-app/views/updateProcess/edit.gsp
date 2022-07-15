@@ -58,7 +58,7 @@
                             </div>
                             <div class="fieldcontain">
                                 <label for="">Update Success</label>
-                                <input type="checkbox" id="updateSuccess" <g:if test="${updateProcess.updateSuccess}">Checked="checked"</g:if> name="updateSuccess" placeholder="">
+                                <g:checkBox name="updateSuccess" value="${updateProcess.updateSuccess}" />
                             </div>
                             <div class="fieldcontain required">
                                <label for="">Contact<span class="required-indicator">*</span></label>
@@ -69,7 +69,7 @@
                                </select>
                             </div>
                             <div class="fieldcontain required">
-                                 <label for="">Check Date<span class="required-indicator">*</span></label>
+                                 <label for="">Update Date<span class="required-indicator">*</span></label>
                                  <g:datePicker name="updateDate" precision="day" value="${updateProcess.updateDate}" />
                             </div>
                         </fieldset>
