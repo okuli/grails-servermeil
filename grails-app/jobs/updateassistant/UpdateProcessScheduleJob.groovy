@@ -36,7 +36,7 @@ class UpdateProcessScheduleJob {
             to "To Mail Address"
             from "From Email Address"
             subject "Update Process Notification"
-            body 'Hi ,\n' +
+            body 'Hi ,+' + name +' \n' +
                     '\n' +
                     'You havent update your process for the past 3 months. You are invited to update your process.\n' +
                     '\n' +
