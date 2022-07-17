@@ -1,6 +1,5 @@
 package updateassistant
 
-import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
@@ -95,6 +94,17 @@ class UpdateProcessController {
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
+        }
+    }
+    def getUpdateProcessList() {
+        def deviceId = params.deviceId
+        if(deviceId == '0'){
+            respond updateProcessService.list(params)
+        }
+        else {
+            def updateProcessList = UpdateProcess.list(params);
+            updateProcessList = updateProcessList.findAll(it -> "'"+it.device.id+"'" == "'"+deviceId+"'")
+            respond updateProcessList
         }
     }
 }

@@ -1,5 +1,5 @@
 ---
-grails:
+exit:
     profile: web
     codegen:
         defaultPackage: updateassistant
@@ -96,7 +96,25 @@ grails:
                 scriptlet: html
                 taglib: none
                 staticparts: none
-
+---
+grails:
+    mail:
+        #host: "smtp.gmail.com"
+        #port: 465
+        #username: "hardik.hirpara18@gmail.com"
+        #password: "dar1821hir"
+        #props:
+        #    mail.smtp.auth: "true"
+        #    mail.smtp.socketFactory.port: "465"
+        #    mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
+        #    mail.smtp.socketFactory.fallback: "false"
+        host: "smtp.live.com"
+        port: 587
+        username: "SenderEmailAddress"
+        password: "pwd"
+        props:
+            mail.smtp.starttls.enable: "true"
+            mail.smtp.port: "587"
 ---
 hibernate:
     cache:
@@ -146,3 +164,6 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+---
+quartz:
+    autoStartup: true

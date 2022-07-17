@@ -23,6 +23,7 @@
             </div>
             <div id="updateprocess">
                 <g:link class="custom-btn btn-9" controller="UpdateProcess">UpdateProcesses</g:link>
+               <!-- <a href="/updateProcess/getUpdateProcessList?deviceId=0" class="custom-btn btn-9" >UpdateProcesses</a> -->
             </div>
          </div>
     </div>
