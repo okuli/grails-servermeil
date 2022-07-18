@@ -1,6 +1,9 @@
 package updateassistant
 
 import grails.validation.ValidationException
+
+import java.text.SimpleDateFormat
+
 import static org.springframework.http.HttpStatus.*
 
 class UpdateProcessController {
@@ -11,7 +14,26 @@ class UpdateProcessController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond updateProcessService.list(params), model:[updateProcessCount: updateProcessService.count()]
+        def deviceId = params.deviceId
+        List<UpdateProcess> updateProcessList = updateProcessService.list(params)
+        if (deviceId != null && deviceId != '0')
+        {
+            updateProcessList = updateProcessList.findAll(it -> "'" + it.device.id + "'" == "'" + deviceId + "'")
+        }
+        def date = new Date()
+
+        for(UpdateProcess process: updateProcessList)
+        {
+            def difference = date.getTime() - process.getUpdateDate().getTime()
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(difference)
+            def monthDiff = cal.get(Calendar.MONTH)
+            if(monthDiff > 3 && !process.updateSuccess)
+            {
+                process.setIsNotUpdated(true)
+            }
+        }
+        respond updateProcessList, model:[updateProcessCount: updateProcessService.count()]
     }
 
     def show(Long id) {
@@ -53,7 +75,11 @@ class UpdateProcessController {
             notFound()
             return
         }
-
+        if(updateProcess.getUpdateSuccess()){
+            def name = updateProcess.getContact().getFirstname() + " " + updateProcess.getContact().getLastname()
+            def email = updateProcess.getContact().getEmailadress()
+            sendEmail(name, email)
+        }
         try {
             updateProcessService.save(updateProcess)
         } catch (ValidationException e) {
@@ -107,5 +133,24 @@ class UpdateProcessController {
             updateProcessList = updateProcessList.findAll(it -> "'" + it.device.id + "'" == "'" + deviceId + "'")
             respond updateProcessList
         }
+    }
+
+    def sendEmail(name, email) {
+        println 'Email Process Start'
+        mailService.sendMail {
+            to email
+            from 'Sender Email Address'
+            subject "Update Process Notification"
+            body 'Hi ,' + name +' \n' +
+                    '\n' +
+                    'You havent update your process for the past 3 months. You are invited to update your process.\n' +
+                    '\n' +
+                    'Let us know if you run into a problem.\n' +
+                    '\n' +
+                    'Best,\n' +
+                    '\n' +
+                    'Team\n'
+        }
+        println 'Email Process End'
     }
 }

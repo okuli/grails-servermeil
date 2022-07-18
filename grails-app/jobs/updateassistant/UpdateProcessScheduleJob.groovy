@@ -23,9 +23,13 @@ class UpdateProcessScheduleJob {
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(difference)
             def monthDiff = cal.get(Calendar.MONTH)
-            if(monthDiff > 3)
+            if(monthDiff > 3 && !process.updateSuccess)
             {
-                sendEmail(process.getContact().firstname + " " + process.getContact().lastname, process.getContact().getEmailadress())
+                def pcontact = process.getDevice().getpContact().getFirstname() + " " + process.getDevice().getpContact().getLastname()
+                def emailAddress = process.getDevice().getpContact().getEmailadress()
+                if(process.getDevice().getsContact().getEmailadress() != null &&  process.getDevice().getsContact().getEmailadress().length() > 0)
+                        emailAddress = ", " + process.getDevice().getsContact().getEmailadress()
+                sendEmail(pcontact, emailAddress)
             }
         }
     }

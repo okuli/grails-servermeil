@@ -35,14 +35,6 @@
                     <g:form resource="${this.updateProcess}" method="POST">
                         <fieldset class="form">
                             <div class="fieldcontain required">
-                                <label for="">Current Version<span class="required-indicator">*</span></label>
-                                <input type="text" id="currentVersion" name="currentVersion" required="" placeholder="">
-                            </div>
-                            <div class="fieldcontain required">
-                                <label for="">Last Version<span class="required-indicator">*</span></label>
-                                <input type="text" id="lastVersion" name="lastVersion" required="" placeholder="">
-                            </div>
-                            <div class="fieldcontain required">
                                <label for="">Device<span class="required-indicator">*</span></label>
                                <select id="device" name="device" required="">
                                     <g:each var="device" in="${Device.list()}">
@@ -51,8 +43,21 @@
                                </select>
                             </div>
                             <div class="fieldcontain required">
+                                <label for="">Installed Version<span class="required-indicator">*</span></label>
+                                <input type="text" id="currentVersion" name="currentVersion" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                                <label for="">Checked Version<span class="required-indicator">*</span></label>
+                                <input type="text" id="lastVersion" name="lastVersion" required="" placeholder="">
+                            </div>
+
+                            <div class="fieldcontain required">
                                  <label for="">Check Date<span class="required-indicator">*</span></label>
                                  <g:datePicker name="checkDate" precision="day" value="${new Date()}" />
+                            </div>
+                            <div class="fieldcontain required">
+                                 <label for="">Update Date<span class="required-indicator">*</span></label>
+                                 <g:datePicker name="updateDate" precision="day" value="${new Date()}" />
                             </div>
                             <div class="fieldcontain">
                                 <label for="">Update Success</label>
@@ -62,13 +67,13 @@
                                <label for="">Contact<span class="required-indicator">*</span></label>
                                <select id="contact" name="contact" required="">
                                     <g:each var="contact" in="${Contact.list()}">
-                                        <option value="${contact.id}">${contact.firstname}</option>
+                                        <option value="${contact.id}">${contact.firstname}/${contact.lastname}</option>
                                     </g:each>
                                </select>
                             </div>
                             <div class="fieldcontain required">
-                                 <label for="">Update Date<span class="required-indicator">*</span></label>
-                                 <g:datePicker name="updateDate" precision="day" value="${new Date()}" />
+                                <label for="">Comment</label>
+                                <g:textArea name="comment" id="comment" rows="10" cols="40"/>
                             </div>
                         </fieldset>
                         <fieldset class="buttons">

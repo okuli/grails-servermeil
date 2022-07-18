@@ -37,6 +37,10 @@
                              <span id="name-label" class="property-label">Update URL</span>
                              <div class="property-value" aria-labelledby="name-label">${model.updateURL}</div>
                          </li>
+                        <li class="fieldcontain">
+                            <span id="name-label" class="property-label">Comment</span>
+                            <div class="property-value" aria-labelledby="name-label">${model.comment}</div>
+                        </li>
                     </ol>
                     <g:form resource="${this.model}" method="DELETE">
                         <fieldset class="buttons">

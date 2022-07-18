@@ -28,8 +28,9 @@
                         <thead>
                             <tr>
                                 <th class="sortable"><a href="/model/index?sort=manufacturer&amp;max=10&amp;order=asc">Manufacturer</a></th>
-                                <th class="sortable"><a href="/model/index?sort=modeName&amp;max=10&amp;order=asc">Mode Name</a></th>
-                                <th class="sortable"><a href="/model/index?sort=updateURL&amp;max=10&amp;order=asc">Update URL</a></th>
+                                <th class="sortable"><a href="/model/index?sort=modeName&amp;max=10&amp;order=asc">Model Name</a></th>
+                                <th class="">Update URL</a></th>
+                                <th class="">Comment</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +39,7 @@
                                     <td><a href="/manufacturer/show/${model.manufacturer.id}">${model.manufacturer.name}</a></td>
                                     <td><a href="/model/show/${model.id}">${model.modeName}</a></td>
                                     <td>${model.updateURL}</td>
+                                    <td>${model.comment}</td>
                                 </tr>
                             </g:each>
                         </tbody>

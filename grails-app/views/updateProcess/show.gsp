@@ -26,32 +26,44 @@
                     </g:if>
                      <ol class="property-list address">
                            <li class="fieldcontain">
-                               <span id="name-label" class="property-label">Current Version</span>
+                                <span id="name-label" class="property-label">ID</span>
+                                <div class="property-value" aria-labelledby="name-label">${updateProcess.id}</div>
+                           </li>
+                           <li class="fieldcontain">
+                               <span id="name-label" class="property-label">Device Manufacturer</span>
+                               <div class="property-value" aria-labelledby="name-label">${updateProcess.device.manufacturer.name}</div>
+                           </li>
+                           <li class="fieldcontain">
+                               <span id="name-label" class="property-label">Device Model</span>
+                               <div class="property-value" aria-labelledby="name-label">${updateProcess.device.model != null ? updateProcess.device.model.modeName: ''}</div>
+                           </li>
+                           <li class="fieldcontain">
+                               <span id="name-label" class="property-label">Installed Version</span>
                                <div class="property-value" aria-labelledby="name-label">${updateProcess.currentVersion}</div>
                            </li>
                            <li class="fieldcontain">
-                               <span id="name-label" class="property-label">Device</span>
-                               <div class="property-value" aria-labelledby="name-label">${updateProcess.device.serialnumber}</div>
+                                <span id="name-label" class="property-label">Checked Version</span>
+                                <div class="property-value" aria-labelledby="name-label">${updateProcess.lastVersion}</div>
                            </li>
-                           <li class="fieldcontain">
-                              <span id="name-label" class="property-label">Contact</span>
-                              <div class="property-value" aria-labelledby="name-label">${updateProcess.contact.firstname}</div>
-                          </li>
                           <li class="fieldcontain">
                                 <span id="name-label" class="property-label">Check Date</span>
-                                <div class="property-value" aria-labelledby="name-label">${updateProcess.checkDate}</div>
+                                <div class="property-value" aria-labelledby="name-label"><g:formatDate format="yyyy-MM-dd" date="${updateProcess.checkDate}" /></div>
                           </li>
                           <li class="fieldcontain">
                                   <span id="name-label" class="property-label">Update Date</span>
-                                  <div class="property-value" aria-labelledby="name-label">${updateProcess.updateDate}</div>
+                                  <div class="property-value" aria-labelledby="name-label"><g:formatDate format="yyyy-MM-dd" date="${updateProcess.updateDate}" /></div>
                           </li>
                           <li class="fieldcontain">
-                                <span id="name-label" class="property-label">Last Version</span>
-                                <div class="property-value" aria-labelledby="name-label">${updateProcess.lastVersion}</div>
-                         </li>
-                         <li class="fieldcontain">
                                  <span id="name-label" class="property-label">Update Success</span>
                                  <div class="property-value" aria-labelledby="name-label">${updateProcess.updateSuccess}</div>
+                          </li>
+                          <li class="fieldcontain">
+                              <span id="name-label" class="property-label">Contact</span>
+                              <div class="property-value" aria-labelledby="name-label">${updateProcess.contact.firstname}/${updateProcess.contact.lastname}</div>
+                          </li>
+                          <li class="fieldcontain">
+                              <span id="name-label" class="property-label">Comment</span>
+                              <div class="property-value" aria-labelledby="name-label">${updateProcess.comment}</div>
                           </li>
                      </ol>
                     <g:form resource="${this.updateProcess}" method="DELETE">

@@ -47,11 +47,16 @@
                                 <input type="text" id="modeName" name="modeName" required="" placeholder="">
                             </div>
 
-
                             <div class="fieldcontain required">
                                 <label for="">Update URL<span class="required-indicator">*</span></label>
                                 <input type="text" id="updateURL" name="updateURL" required="" placeholder="">
                             </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Comment</label>
+                                <g:textArea name="comment" id="comment" rows="10" cols="40"/>
+                            </div>
+
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

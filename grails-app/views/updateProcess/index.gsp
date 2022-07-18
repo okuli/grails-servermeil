@@ -3,36 +3,39 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <asset:stylesheet src="updateprocess.css"/>
         <g:set var="entityName" value="${message(code: 'updateProcess.label', default: 'UpdateProcess')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
         <g:set var="sortName" value="${request.getParameter("sort")}" />
         <g:set var="order" value="${request.getParameter("order")}" />
+        <g:set var="deviceId" value="${request.getParameter("deviceId")}" />
     </head>
     <body>
     <script type="text/javascript">
+        function URL_add_parameter(url, param, value){
+            var hash       = {};
+            var parser     = document.createElement('a');
+            parser.href    = url;
+            var parameters = parser.search.split(/\?|&/);
+            for(var i=0; i < parameters.length; i++) {
+                if(!parameters[i])
+                    continue;
+
+                var ary      = parameters[i].split('=');
+                hash[ary[0]] = ary[1];
+            }
+            hash[param] = value;
+            var list = [];
+            Object.keys(hash).forEach(function (key) {
+                list.push(key + '=' + hash[key]);
+            });
+            parser.search = '?' + list.join('&');
+            return parser.href;
+        }
         function updateGrid()
         {
-            $('#updateProcessTable tbody').empty();
-            var newTRBody;
             var selectedId = $('#device :selected').val();
-            <g:each var="updateProcess" status="i" in="${updateProcessList}">
-                  var deviceId = ${updateProcess.device.id};
-                  if(selectedId == deviceId || selectedId == 0)
-                  {
-                    newTRBody = newTRBody + "<tr>"
-                        +"<td><a href='/updateProcess/show/${updateProcess.id}'>${updateProcess.currentVersion}</a></td>"
-                        +"<td>${updateProcess.lastVersion}</td>"
-                        +"<td>${updateProcess.checkDate}</td>"
-                        +"<td>${updateProcess.updateDate}</td>"
-                        +"<td>${updateProcess.updateSuccess}</td>"
-                        +"<td><a href='/device/show/${updateProcess.device.id}'>${updateProcess.device.serialnumber}</a></td>"
-                        +"<td><a href='/contact/show/${updateProcess.contact.id}'>${updateProcess.contact.firstname}</a></td>"
-                        +"<td><a href='/updateProcess/edit/${updateProcess.id}'><img src='/assets/skin/database_edit.png' /></a></td>"
-                        +"</tr>"
-                  }
-
-             </g:each>;
-            $('#updateProcessTable tbody').append(newTRBody);
+            window.location.href = URL_add_parameter(window.location.href,'deviceId',selectedId);
         }
     </script>
     <g:render template="/common/header" />
@@ -58,33 +61,37 @@
                         <select id="device" name="device" onchange="updateGrid()">
                             <option value="0">Select Device</option>
                             <g:each var="device" in="${Device.list()}">
-                                <option value="${device.id}" <g:if test="${deviceID == device.id}">selected="selected"</g:if>>${device.serialnumber}</option>
+                                <option value="${device.id}" <g:if test="${''+deviceId == ''+device.id}">selected="selected"</g:if>>${device.serialnumber}</option>
                             </g:each>
                         </select>
                     </div>
                     <table id="updateProcessTable">
                     <thead>
                         <tr>
-                            <th class="sortable ${sortName == 'currentVersion' ? 'sorted':''} ${sortName == 'currentVersion' ? order : ''}"><a href="/updateProcess/index?sort=currentVersion&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">Current Version</a></th>
-                            <th class="sortable ${sortName == 'lastVersion' ? 'sorted':''} ${sortName == 'lastVersion' ? order : ''}"><a href="/updateProcess/index?sort=lastVersion&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">Last Version</a></th>
+                            <th class="sortable ${sortName == 'id' ? 'sorted':''} ${sortName == 'id' ? order : ''}"><a href="/updateProcess/index?sort=id&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">ID</a></th>
+                            <th class="">Device Manufacturer</th>
+                            <th class="">Device Model</th>
+                            <th class="">Installed Version</th>
+                            <th class="">Checked Version</a></th>
                             <th class="">Check Date</th>
                             <th class="">Update Date</th>
                             <th class="">Update Success</th>
-                            <th class="">Device</th>
                             <th class="">Contact</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <g:each var="updateProcess" status="i" in="${updateProcessList}">
-                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <td><a href="/updateProcess/show/${updateProcess.id}">${updateProcess.currentVersion}</a></td>
+                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'} ${updateProcess.isNotUpdated ? 'notupdated' : ''}">
+                                <td><a href="/updateProcess/show/${updateProcess.id}">${updateProcess.id}</a></td>
+                                <td>${updateProcess.device.manufacturer.name}</td>
+                                <td>${updateProcess.device.model != null ? updateProcess.device.model.modeName : ''}</td>
+                                <td>${updateProcess.currentVersion}</td>
                                 <td>${updateProcess.lastVersion}</td>
-                                <td>${updateProcess.checkDate}</td>
-                                <td>${updateProcess.updateDate}</td>
+                                <td><g:formatDate format="yyyy-MM-dd" date="${updateProcess.checkDate}" /></td>
+                                <td><g:formatDate format="yyyy-MM-dd" date="${updateProcess.updateDate}" /></td>
                                 <td>${updateProcess.updateSuccess}</td>
-                                <td><a href="/device/show/${updateProcess.device.id}">${updateProcess.device.serialnumber}</a></td>
-                                <td><a href="/contact/show/${updateProcess.contact.id}">${updateProcess.contact.firstname}</a></td>
+                                <td>${updateProcess.contact.firstname}/${updateProcess.contact.lastname}</td>
                                 <td><a href="/updateProcess/edit/${updateProcess.id}"><g:img dir="images" file="/skin/database_edit.png" /></a></td>
                             </tr>
                         </g:each>

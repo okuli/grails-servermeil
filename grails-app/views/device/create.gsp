@@ -1,9 +1,10 @@
-<%@ page import="updateassistant.Customer"  %>
-<%@ page import="updateassistant.Location"  %>
-<%@ page import="updateassistant.Types"  %>
-<%@ page import="updateassistant.Manufacturer"  %>
-<%@ page import="updateassistant.OperatingSystem"  %>
-<%@ page import="updateassistant.Contact"  %>
+<%@ page import="updateassistant.Customer" %>
+<%@ page import="updateassistant.Location" %>
+<%@ page import="updateassistant.Types" %>
+<%@ page import="updateassistant.Manufacturer" %>
+<%@ page import="updateassistant.OperatingSystem" %>
+<%@ page import="updateassistant.Contact" %>
+<%@ page import="updateassistant.Model" %>
 
 <!DOCTYPE html>
 <html>
@@ -39,11 +40,27 @@
                     </g:hasErrors>
                     <g:form resource="${this.device}" method="POST">
                         <fieldset class="form">
+                             <div class="fieldcontain required">
+                                <label for="">Customer<span class="required-indicator">*</span></label>
+                                <select id="customer" name="customer" required="">
+                                    <g:each var="customer" in="${Customer.list()}">
+                                        <option value="${customer.id}">${customer.name}</option>
+                                    </g:each>
+                                </select>
+                            </div>
                             <div class="fieldcontain required">
                                <label for="">Manufacturer<span class="required-indicator">*</span></label>
                                <select id="manufacturer" name="manufacturer" required="">
                                     <g:each var="manufacturer" in="${Manufacturer.list()}">
                                         <option value="${manufacturer.id}">${manufacturer.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">Model<span class="required-indicator">*</span></label>
+                               <select id="model" name="model" required="">
+                                    <g:each var="model" in="${Model.list()}">
+                                        <option value="${model.id}">${model.modeName}</option>
                                     </g:each>
                                </select>
                             </div>
@@ -56,14 +73,6 @@
                                </select>
                             </div>
                             <div class="fieldcontain required">
-                               <label for="">P Contact<span class="required-indicator">*</span></label>
-                               <select id="pContact" name="pContact" required="">
-                                    <g:each var="contact" in="${Contact.list()}">
-                                        <option value="${contact.id}">${contact.firstname} ${contact.lastname}</option>
-                                    </g:each>
-                               </select>
-                            </div>
-                            <div class="fieldcontain required">
                                <label for="">Location<span class="required-indicator">*</span></label>
                                <select id="location" name="location" required="">
                                     <g:each var="location" in="${Location.list()}">
@@ -72,32 +81,32 @@
                                </select>
                             </div>
                             <div class="fieldcontain required">
-                                <label for="">Serial Number<span class="required-indicator">*</span></label>
-                                <input type="text" id="serialnumber" name="serialnumber" required="" placeholder="">
-                            </div>
-                            <div class="fieldcontain required">
                                 <label for="">OS Version<span class="required-indicator">*</span></label>
                                 <input type="text" id="OSVersion" name="OSVersion" required="" placeholder="">
                             </div>
                             <div class="fieldcontain required">
-                               <label for="">Customer<span class="required-indicator">*</span></label>
-                               <select id="customer" name="customer" required="">
-                                    <g:each var="customer" in="${Customer.list()}">
-                                        <option value="${customer.id}">${customer.name}</option>
+                                <label for="">Installed OS Version<span class="required-indicator">*</span></label>
+                                <input type="text" id="installedOSVersion" name="installedOSVersion" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">P Contact<span class="required-indicator">*</span></label>
+                               <select id="pContact" name="pContact" required="">
+                                    <g:each var="contact" in="${Contact.list()}">
+                                        <option value="${contact.id}">${contact.firstname}/${contact.lastname}</option>
                                     </g:each>
                                </select>
                             </div>
                             <div class="fieldcontain required">
-                               <label for="">S Contact<span class="required-indicator">*</span></label>
+                               <label for="">s Contact<span class="required-indicator">*</span></label>
                                <select id="sContact" name="sContact" required="">
                                     <g:each var="contact" in="${Contact.list()}">
-                                        <option value="${contact.id}">${contact.firstname} ${contact.lastname}</option>
+                                        <option value="${contact.id}">${contact.firstname}/${contact.lastname}</option>
                                     </g:each>
                                </select>
                             </div>
                             <div class="fieldcontain required">
-                                <label for="">Update Processes<span class="required-indicator">*</span></label>
-                                <a href="/updateProcess/create?device.id=">Add UpdateProcess</a>
+                                <label for="">Serial Number<span class="required-indicator">*</span></label>
+                                <input type="text" id="serialnumber" name="serialnumber" required="" placeholder="">
                             </div>
                             <div class="fieldcontain required">
                                <label for="">Operating System<span class="required-indicator">*</span></label>
@@ -106,6 +115,10 @@
                                         <option value="${operatingSystem.id}">${operatingSystem.name}</option>
                                     </g:each>
                                </select>
+                            </div>
+                            <div class="fieldcontain required">
+                                <label for="">Update Processes<span class="required-indicator">*</span></label>
+                                <a href="/updateProcess/create?device.id=">Add UpdateProcess</a>
                             </div>
                         </fieldset>
                         <fieldset class="buttons">

@@ -25,42 +25,54 @@
                     <div class="message" role="status">${flash.message}</div>
                     </g:if>
                    <ol class="property-list address">
+                        <li class="fieldcontain">
+                           <span id="name-label" class="property-label">ID</span>
+                           <div class="property-value" aria-labelledby="name-label">${device.id}</div>
+                        </li>
+                        <li class="fieldcontain">
+                            <span id="name-label" class="property-label">Customer</span>
+                            <div class="property-value" aria-labelledby="name-label">${device.customer.name}</div>
+                        </li>
                        <li class="fieldcontain">
                            <span id="name-label" class="property-label">Manufacturer</span>
                            <div class="property-value" aria-labelledby="name-label">${device.manufacturer.name}</div>
+                       </li>
+                       <li class="fieldcontain">
+                          <span id="name-label" class="property-label">Model</span>
+                          <div class="property-value" aria-labelledby="name-label">${device.model != null ? device.model.modeName : ''}</div>
                        </li>
                        <li class="fieldcontain">
                            <span id="name-label" class="property-label">Type of Device</span>
                            <div class="property-value" aria-labelledby="name-label">${device.typeOfDevice.name}</div>
                        </li>
                        <li class="fieldcontain">
-                          <span id="name-label" class="property-label">P Contact</span>
-                          <div class="property-value" aria-labelledby="name-label">${device.pContact.firstname}</div>
-                      </li>
-                      <li class="fieldcontain">
-                         <span id="name-label" class="property-label">Location</span>
-                         <div class="property-value" aria-labelledby="name-label">${device.location.rackName}</div>
-                     </li>
-                     <li class="fieldcontain">
-                         <span id="name-label" class="property-label">Serial Number</span>
-                         <div class="property-value" aria-labelledby="name-label">${device.serialnumber}</div>
-                     </li>
-                     <li class="fieldcontain">
-                        <span id="name-label" class="property-label">OS Version</span>
-                        <div class="property-value" aria-labelledby="name-label">${device.OSVersion}</div>
-                     </li>
-                     <li class="fieldcontain">
-                           <span id="name-label" class="property-label">Customer</span>
-                           <div class="property-value" aria-labelledby="name-label">${device.customer.name}</div>
-                     </li>
-                     <li class="fieldcontain">
+                            <span id="name-label" class="property-label">Location</span>
+                            <div class="property-value" aria-labelledby="name-label">${device.location.rackName}</div>
+                        </li>
+                       <li class="fieldcontain">
+                            <span id="name-label" class="property-label">OS Version</span>
+                            <div class="property-value" aria-labelledby="name-label">${device.OSVersion}</div>
+                         </li>
+                       <li class="fieldcontain">
+                             <span id="name-label" class="property-label">Installed OS Version</span>
+                             <div class="property-value" aria-labelledby="name-label">${device.installedOSVersion}</div>
+                          </li>
+                       <li class="fieldcontain">
+                         <span id="name-label" class="property-label">P Contact</span>
+                         <div class="property-value" aria-labelledby="name-label">${device.pContact.firstname}/${device.pContact.lastname}</div>
+                       </li>
+                       <li class="fieldcontain">
                           <span id="name-label" class="property-label">S Contact</span>
-                          <div class="property-value" aria-labelledby="name-label">${device.sContact.firstname}</div>
-                     </li>
-                     <li class="fieldcontain">
+                          <div class="property-value" aria-labelledby="name-label">${device.sContact.firstname}/${device.pContact.lastname}</div>
+                        </li>
+                       <li class="fieldcontain">
+                            <span id="name-label" class="property-label">Serial Number</span>
+                            <div class="property-value" aria-labelledby="name-label">${device.serialnumber}</div>
+                       </li>
+                       <li class="fieldcontain">
                            <span id="name-label" class="property-label">Operating System</span>
                            <div class="property-value" aria-labelledby="name-label">${device.operatingSystem.name}</div>
-                      </li>
+                       </li>
                    </ol>
                     <g:form resource="${this.device}" method="DELETE">
                         <fieldset class="buttons">

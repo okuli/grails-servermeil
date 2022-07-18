@@ -4,6 +4,7 @@
 <%@ page import="updateassistant.Manufacturer"  %>
 <%@ page import="updateassistant.OperatingSystem"  %>
 <%@ page import="updateassistant.Contact"  %>
+<%@ page import="updateassistant.Model" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,10 +42,26 @@
                         <g:hiddenField name="version" value="${this.device?.version}" />
                         <fieldset class="form">
                             <div class="fieldcontain required">
+                               <label for="">Customer<span class="required-indicator">*</span></label>
+                               <select id="customer" name="customer" required="">
+                                    <g:each var="customer" in="${Customer.list()}">
+                                        <option value="${customer.id}" <g:if test="${device.customer.id == customer.id}">selected="selected"</g:if>>${customer.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+                            <div class="fieldcontain required">
                                <label for="">Manufacturer<span class="required-indicator">*</span></label>
                                <select id="manufacturer" name="manufacturer" required="">
                                     <g:each var="manufacturer" in="${Manufacturer.list()}">
-                                        <option value="${manufacturer.id}">${manufacturer.name}</option>
+                                        <option value="${manufacturer.id}" <g:if test="${device.manufacturer.id == manufacturer.id}">selected="selected"</g:if>>${manufacturer.name}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">Model<span class="required-indicator">*</span></label>
+                               <select id="model" name="model" required="">
+                                    <g:each var="model" in="${Model.list()}">
+                                        <option value="${model.id}" <g:if test="${device.model != null && device.model.id == model.id}">selected="selected"</g:if>>${model.modeName}</option>
                                     </g:each>
                                </select>
                             </div>
@@ -52,15 +69,7 @@
                                <label for="">Types of Device<span class="required-indicator">*</span></label>
                                <select id="typeOfDevice" name="typeOfDevice" required="">
                                     <g:each var="types" in="${Types.list()}">
-                                        <option value="${types.id}">${types.name}</option>
-                                    </g:each>
-                               </select>
-                            </div>
-                            <div class="fieldcontain required">
-                               <label for="">P Contact<span class="required-indicator">*</span></label>
-                               <select id="pContact" name="pContact" required="">
-                                    <g:each var="contact" in="${Contact.list()}">
-                                        <option value="${contact.id}">${contact.firstname} ${contact.lastname}</option>
+                                        <option value="${types.id}" <g:if test="${device.typeOfDevice.id == types.id}">selected="selected"</g:if>>${types.name}</option>
                                     </g:each>
                                </select>
                             </div>
@@ -68,7 +77,31 @@
                                <label for="">Location<span class="required-indicator">*</span></label>
                                <select id="location" name="location" required="">
                                     <g:each var="location" in="${Location.list()}">
-                                        <option value="${location.id}">${location.rackName}</option>
+                                        <option value="${location.id}" <g:if test="${device.location.id == location.id}">selected="selected"</g:if>>${location.rackName}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+                            <div class="fieldcontain required">
+                                <label for="">OS Version<span class="required-indicator">*</span></label>
+                                <input type="text" id="OSVersion" value="${device.OSVersion}" name="OSVersion" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                                <label for="">Installed OS Version<span class="required-indicator">*</span></label>
+                                <input type="text" id="installedOSVersion" name="installedOSVersion" value="${device.installedOSVersion}" required="" placeholder="">
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">P Contact<span class="required-indicator">*</span></label>
+                               <select id="pContact" name="pContact" required="">
+                                    <g:each var="contact" in="${Contact.list()}">
+                                        <option value="${contact.id}" <g:if test="${device.pContact.id == contact.id}">selected="selected"</g:if>>${contact.firstname}/${contact.lastname}</option>
+                                    </g:each>
+                               </select>
+                            </div>
+                            <div class="fieldcontain required">
+                               <label for="">S Contact<span class="required-indicator">*</span></label>
+                               <select id="sContact" name="sContact" required="">
+                                    <g:each var="contact" in="${Contact.list()}">
+                                        <option value="${contact.id}" <g:if test="${device.sContact.id == contact.id}">selected="selected"</g:if>>${contact.firstname}/${contact.lastname}</option>
                                     </g:each>
                                </select>
                             </div>
@@ -77,36 +110,16 @@
                                 <input type="text" id="serialnumber" value="${device.serialnumber}" name="serialnumber" required="" placeholder="">
                             </div>
                             <div class="fieldcontain required">
-                                <label for="">OS Version<span class="required-indicator">*</span></label>
-                                <input type="text" id="OSVersion" value="${device.OSVersion}" name="OSVersion" required="" placeholder="">
-                            </div>
-                            <div class="fieldcontain required">
-                               <label for="">Customer<span class="required-indicator">*</span></label>
-                               <select id="customer" name="customer" required="">
-                                    <g:each var="customer" in="${Customer.list()}">
-                                        <option value="${customer.id}">${customer.name}</option>
-                                    </g:each>
-                               </select>
-                            </div>
-                            <div class="fieldcontain required">
-                               <label for="">S Contact<span class="required-indicator">*</span></label>
-                               <select id="sContact" name="sContact" required="">
-                                    <g:each var="contact" in="${Contact.list()}">
-                                        <option value="${contact.id}">${contact.firstname} ${contact.lastname}</option>
+                               <label for="">Operating System<span class="required-indicator">*</span></label>
+                               <select id="operatingSystem" name="operatingSystem" required="">
+                                    <g:each var="operatingSystem" in="${OperatingSystem.list()}">
+                                        <option value="${operatingSystem.id}" <g:if test="${device.operatingSystem.id == operatingSystem.id}">selected="selected"</g:if>>${operatingSystem.name}</option>
                                     </g:each>
                                </select>
                             </div>
                             <div class="fieldcontain required">
                                 <label for="">Update Processes<span class="required-indicator">*</span></label>
                                 <a href="/updateProcess/create?device.id=">Add UpdateProcess</a>
-                            </div>
-                            <div class="fieldcontain required">
-                               <label for="">Operating System<span class="required-indicator">*</span></label>
-                               <select id="operatingSystem" name="operatingSystem" required="">
-                                    <g:each var="operatingSystem" in="${OperatingSystem.list()}">
-                                        <option value="${operatingSystem.id}">${operatingSystem.name}</option>
-                                    </g:each>
-                               </select>
                             </div>
                         </fieldset>
                         <fieldset class="buttons">

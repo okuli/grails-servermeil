@@ -29,26 +29,30 @@
                     <table>
                     <thead>
                         <tr>
-                            <th class="sortable ${sortName == 'serialnumber' ? 'sorted':''} ${sortName == 'serialnumber' ? order : ''}"><a href="/device/index?sort=serialnumber&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">Serial Number</a></th>
+                            <th class="sortable ${sortName == 'id' ? 'sorted':''} ${sortName == 'id' ? order : ''}"><a href="/device/index?sort=id&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">ID</a></th>
+                            <th class="sortable">Customer</th>
                             <th class="sortable">Manufacturer</th>
+                            <th class="sortable">Model</th>
                             <th class="sortable">Type of Device</th>
-                            <th class="sortable">P Contact</th>
                             <th class="sortable">Location</th>
                             <th class="sortable">OS Version</th>
-                            <th class="sortable">Customer</th>
+                            <th class="sortable">Installed OS Version</th>
+                            <th class="sortable">P Contact</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <g:each var="device" status="i" in="${deviceList}">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <td><a href="/device/show/${device.id}">${device.serialnumber}</a></td>
+                                <td><a href="/device/show/${device.id}">${device.id}</a></td>
+                                <td><a href="/customer/show/${device.customer.id}">${device.customer.name}</a></td>
                                 <td><a href="/manufacturer/show/${device.manufacturer.id}">${device.manufacturer.name}</a></td>
+                                <td>${device.model != null? device.model.modeName : ''}</td>
                                 <td><a href="/types/show/${device.typeOfDevice.id}">${device.typeOfDevice.name}</a></td>
-                                <td><a href="/contact/show/${device.pContact.id}">${device.pContact.firstname}</a></td>
                                 <td><a href="/location/show/${device.location.id}">${device.location.rackName}</a></td>
                                 <td>${device.OSVersion}</td>
-                                <td><a href="/customer/show/${device.customer.id}">${device.customer.name}</a></td>
+                                <td>${device.installedOSVersion}</td>
+                                <td><a href="/contact/show/${device.pContact.id}">${device.pContact.firstname}/${device.pContact.lastname}</a></td>
                                 <td><a href="/device/edit/${device.id}"><g:img dir="images" file="/skin/database_edit.png" /></a></td>
                             </tr>
                         </g:each>

@@ -49,10 +49,14 @@
                                 <input type="text" id="modeName" value="${model.modeName}" name="modeName" required="" placeholder="">
                             </div>
 
-
                             <div class="fieldcontain required">
                                 <label for="">Update URL<span class="required-indicator">*</span></label>
                                 <input type="text" id="updateURL" value="${model.updateURL}" name="updateURL" required="" placeholder="">
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">Comment</label>
+                                <g:textArea name="comment" id="comment" value="${model.comment}" rows="10" cols="40"/>
                             </div>
                         </fieldset>
                         <fieldset class="buttons">
