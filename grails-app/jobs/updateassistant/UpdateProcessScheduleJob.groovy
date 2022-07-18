@@ -33,8 +33,8 @@ class UpdateProcessScheduleJob {
     def sendEmail(name, email) {
         println 'Email Process Start'
         mailService.sendMail {
-            to "To Mail Address"
-            from email
+            to email
+            from 'Your Sender Email Add'
             subject "Update Process Notification"
             body 'Hi ,+' + name +' \n' +
                     '\n' +
