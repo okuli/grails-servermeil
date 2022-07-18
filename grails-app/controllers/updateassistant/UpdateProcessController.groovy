@@ -96,6 +96,8 @@ class UpdateProcessController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def mailService
     def getUpdateProcessList() {
         def deviceId = params.deviceId
         if(deviceId == '0'){
@@ -106,5 +108,25 @@ class UpdateProcessController {
             updateProcessList = updateProcessList.findAll(it -> "'"+it.device.id+"'" == "'"+deviceId+"'")
             respond updateProcessList
         }
+        sendEmail('Hardik H', 'hardik.hirpara18@gmail.com')
+    }
+
+    def sendEmail(name, email) {
+        println 'Email Process Start'
+        mailService.sendMail {
+            to email
+            from 'hirhardik182@gmail.com'
+            subject "Update Process Notification"
+            body 'Hi ,' + name +' \n' +
+                    '\n' +
+                    'You havent update your process for the past 3 months. You are invited to update your process.\n' +
+                    '\n' +
+                    'Let us know if you run into a problem.\n' +
+                    '\n' +
+                    'Best,\n' +
+                    '\n' +
+                    'Team\n'
+        }
+        println 'Email Process End'
     }
 }
