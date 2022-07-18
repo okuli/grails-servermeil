@@ -25,16 +25,16 @@ class UpdateProcessScheduleJob {
             def monthDiff = cal.get(Calendar.MONTH)
             if(monthDiff > 3)
             {
-                sendEmail(process.getContact().firstname + " " + process.getContact().lastname)
+                sendEmail(process.getContact().firstname + " " + process.getContact().lastname, process.getContact().getEmailadress())
             }
         }
     }
 
-    def sendEmail(name) {
+    def sendEmail(name, email) {
         println 'Email Process Start'
         mailService.sendMail {
             to "To Mail Address"
-            from "From Email Address"
+            from email
             subject "Update Process Notification"
             body 'Hi ,+' + name +' \n' +
                     '\n' +
