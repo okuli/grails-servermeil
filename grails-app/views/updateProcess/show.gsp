@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <asset:stylesheet src="updateprocess.css"/>
         <g:set var="entityName" value="${message(code: 'updateProcess.label', default: 'UpdateProcess')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
@@ -21,8 +22,23 @@
             <section class="row">
                 <div id="show-updateProcess" class="col-12 content scaffold-show" role="main">
                     <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+                    <g:if test="${flash.error}">
+                      <div class="noti error-msg">
+                        <g:img dir="images" file="/error_icon.png" />
+                        <div style="margin: 0 0 0 20px">
+                            <h2>Error</h2>
+                            <p>${flash.error}</p>
+                        </div>
+                      </div>
+                    </g:if>
                     <g:if test="${flash.message}">
-                    <div class="message" role="status">${flash.message}</div>
+                      <div class="noti success-msg">
+                        <g:img dir="images" file="/success_icon.png" />
+                        <div style="margin: 0 0 0 20px">
+                            <h2>Success</h2>
+                            <p>${flash.message}</p>
+                        </div>
+                      </div>
                     </g:if>
                      <ol class="property-list address">
                            <li class="fieldcontain">

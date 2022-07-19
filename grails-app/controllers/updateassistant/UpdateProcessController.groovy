@@ -75,25 +75,29 @@ class UpdateProcessController {
             notFound()
             return
         }
-        if(updateProcess.getUpdateSuccess()){
-            def name = updateProcess.getContact().getFirstname() + " " + updateProcess.getContact().getLastname()
-            def email = updateProcess.getContact().getEmailadress()
-            sendEmail(name, email)
-        }
-        try {
-            updateProcessService.save(updateProcess)
-        } catch (ValidationException e) {
-            respond updateProcess.errors, view:'edit'
-            return
-        }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'updateProcess.label', default: 'UpdateProcess'), updateProcess.id])
-                redirect updateProcess
+        def name = updateProcess.getContact().getFirstname() + " " + updateProcess.getContact().getLastname()
+        def email = updateProcess.getContact().getEmailadress()
+        try {
+            if(updateProcess.getUpdateSuccess()) {
+                sendEmail(name, email)
             }
-            '*'{ respond updateProcess, [status: OK] }
+            try {
+                updateProcessService.save(updateProcess)
+                if(updateProcess.getUpdateSuccess()) {
+                    flash.message = "The email was sent"
+                } else {
+                    flash.message = "UpdateProcess record update successfully"
+                }
+            } catch (ValidationException e) {
+                respond updateProcess.errors, view:'edit'
+                return
+            }
+        } catch(Exception e){
+            println 'Exception : ' + e.message
+            flash.error = 'The email could not be send'
         }
+        redirect action: "show", id: params.id, method:"PUT"
     }
 
     def delete(Long id) {
@@ -136,21 +140,26 @@ class UpdateProcessController {
     }
 
     def sendEmail(name, email) {
-        println 'Email Process Start'
-        mailService.sendMail {
-            to email
-            from 'Sender Email Address'
-            subject "Update Process Notification"
-            body 'Hi ,' + name +' \n' +
-                    '\n' +
-                    'You havent update your process for the past 3 months. You are invited to update your process.\n' +
-                    '\n' +
-                    'Let us know if you run into a problem.\n' +
-                    '\n' +
-                    'Best,\n' +
-                    '\n' +
-                    'Team\n'
+        try {
+            println 'Email Process Start'
+            mailService.sendMail {
+                to email
+                from 'Sender Email Address'
+                subject "Update Process Notification"
+                body 'Hi ,' + name + ' \n' +
+                        '\n' +
+                        'You havent update your process for the past 3 months. You are invited to update your process.\n' +
+                        '\n' +
+                        'Let us know if you run into a problem.\n' +
+                        '\n' +
+                        'Best,\n' +
+                        '\n' +
+                        'Team\n'
+            }
+            println 'Email Process End'
+        } catch(Exception e)
+        {
+            throw e
         }
-        println 'Email Process End'
     }
 }
