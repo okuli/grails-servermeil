@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat
 
 class UpdateProcessScheduleJob {
     static triggers = {
-        cron name: 'emailTriggerJob', cronExpression: "0 0 1 * * ?" //Every Day 1 am midnight
+        cron name: 'emailTriggerJob', cronExpression: "20 * * * * ?" //Every 20 second
+        // cron name: 'emailTriggerJob', cronExpression: "0 0 1 * * ?" //Every Day 1 am midnight
     }
 
     def mailService
