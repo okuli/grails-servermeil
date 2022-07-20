@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 
 class UpdateProcessScheduleJob {
     static triggers = {
-        cron name: 'emailTriggerJob', cronExpression: "20 * * * * ?" //Every 20 second
+        //cron name: 'emailTriggerJob', cronExpression: "20 * * * * ?" //Every 20 second
         // cron name: 'emailTriggerJob', cronExpression: "0 0 1 * * ?" //Every Day 1 am midnight
     }
 
@@ -26,26 +26,32 @@ class UpdateProcessScheduleJob {
             def monthDiff = cal.get(Calendar.MONTH)
             if(monthDiff > 3 && !process.updateSuccess)
             {
-                def pcontact = process.getDevice().getpContact().getFirstname() + " " + process.getDevice().getpContact().getLastname()
-                def emailAddress = process.getDevice().getpContact().getEmailadress()
-                if(process.getDevice().getsContact().getEmailadress() != null &&  process.getDevice().getsContact().getEmailadress().length() > 0)
-                        emailAddress = ", " + process.getDevice().getsContact().getEmailadress()
-                sendEmail(pcontact, emailAddress)
+                sendEmail(process)
             }
         }
     }
 
-    def sendEmail(name, email) {
+    def sendEmail(UpdateProcess process) {
         println 'Email Process Start'
+        def email = process.getDevice().getpContact().getEmailadress()
+        def name = process.getDevice().getpContact().getFirstname() + ' ' + process.getDevice().getpContact().getLastname()
+        def emailCC = process.getDevice().getsContact().getEmailadress()
+        def device = process.getDevice().getInstalledOSVersion()
+        def model = process.getDevice().getModel().getModeName()
+        def location = process.getDevice().getLocation().getRackName()
+        def datacenter = process.getDevice().getLocation().getDc().getName()
         mailService.sendMail {
             to email
-            from 'Your Sender Email Add'
+            from 'test@test.com'
+            cc emailCC, 'xyz@xyz.com'
             subject "Update Process Notification"
             body 'Hi ,' + name +' \n' +
                     '\n' +
-                    'You havent update your process for the past 3 months. You are invited to update your process.\n' +
+                    'The last update Process for the device ' + device + ' ' + model + ' in ' + datacenter + ' ' + location + ' is more than 3 month ago.\n' +
                     '\n' +
-                    'Let us know if you run into a problem.\n' +
+                    'Please check if there are updates available.\n' +
+                    '\n' +
+                    'If you have further questions, please contact XYZ Person\n' +
                     '\n' +
                     'Best,\n' +
                     '\n' +

@@ -71,7 +71,7 @@
                           </li>
                           <li class="fieldcontain">
                                  <span id="name-label" class="property-label">Update Success</span>
-                                 <div class="property-value" aria-labelledby="name-label">${updateProcess.updateSuccess}</div>
+                                 <div class="property-value" aria-labelledby="name-label">${updateProcess.updateSuccess?'Yes':'No'}</div>
                           </li>
                           <li class="fieldcontain">
                               <span id="name-label" class="property-label">Contact</span>

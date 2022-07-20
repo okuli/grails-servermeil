@@ -11,7 +11,6 @@ class UpdateProcess {
     String comment
     Boolean updateSuccess = Boolean.FALSE
     Boolean isNotUpdated = Boolean.FALSE
-    Boolean isEmailSend = Boolean.FALSE
     static transients = ['isNotUpdated', 'isEmailSend']
 
     static constraints = {

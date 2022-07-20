@@ -90,7 +90,7 @@
                                 <td>${updateProcess.lastVersion}</td>
                                 <td><g:formatDate format="yyyy-MM-dd" date="${updateProcess.checkDate}" /></td>
                                 <td><g:formatDate format="yyyy-MM-dd" date="${updateProcess.updateDate}" /></td>
-                                <td>${updateProcess.updateSuccess}</td>
+                                <td>${updateProcess.updateSuccess ? 'Yes':'No'}</td>
                                 <td>${updateProcess.contact.firstname}/${updateProcess.contact.lastname}</td>
                                 <td><a href="/updateProcess/edit/${updateProcess.id}"><g:img dir="images" file="/skin/database_edit.png" /></a></td>
                             </tr>

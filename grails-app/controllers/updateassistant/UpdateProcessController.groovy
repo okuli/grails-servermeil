@@ -9,6 +9,7 @@ import static org.springframework.http.HttpStatus.*
 class UpdateProcessController {
 
     UpdateProcessService updateProcessService
+    DeviceService deviceService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -18,7 +19,13 @@ class UpdateProcessController {
         List<UpdateProcess> updateProcessList = updateProcessService.list(params)
         if (deviceId != null && deviceId != '0')
         {
-            updateProcessList = updateProcessList.findAll(it -> "'" + it.device.id + "'" == "'" + deviceId + "'")
+            def device = deviceService.get(deviceId)
+            def processList = UpdateProcess.createCriteria()
+            updateProcessList = processList.list {
+                and {
+                    eq("device", device)
+                }
+            }
         }
         def date = new Date()
 
@@ -76,11 +83,9 @@ class UpdateProcessController {
             return
         }
 
-        def name = updateProcess.getContact().getFirstname() + " " + updateProcess.getContact().getLastname()
-        def email = updateProcess.getContact().getEmailadress()
         try {
             if(updateProcess.getUpdateSuccess()) {
-                sendEmail(name, email)
+                sendEmail(updateProcess)
             }
             try {
                 updateProcessService.save(updateProcess)
@@ -128,29 +133,26 @@ class UpdateProcessController {
     }
 
     def mailService
-    def getUpdateProcessList() {
-        def deviceId = params.deviceId
-        if (deviceId == '0') {
-            respond updateProcessService.list(params)
-        } else {
-            def updateProcessList = UpdateProcess.list(params);
-            updateProcessList = updateProcessList.findAll(it -> "'" + it.device.id + "'" == "'" + deviceId + "'")
-            respond updateProcessList
-        }
-    }
-
-    def sendEmail(name, email) {
+    def sendEmail(UpdateProcess updateProcess) {
         try {
+            def email = updateProcess.getContact().getEmailadress()
+            def name = updateProcess.getContact().getFirstname() + " " + updateProcess.getContact().getLastname()
+            def emailCC = updateProcess.getDevice().getsContact().getEmailadress()
+            def device = updateProcess.getDevice().getInstalledOSVersion()
+            def model = updateProcess.getDevice().getModel().getModeName()
+            def location = updateProcess.getDevice().getLocation().getRackName()
+            def datacenter = updateProcess.getDevice().getLocation().getDc().getName()
             println 'Email Process Start'
             mailService.sendMail {
                 to email
-                from 'Sender Email Address'
+                from 'test@test.com'
+                cc emailCC, 'xyz@xyz.com'
                 subject "Update Process Notification"
                 body 'Hi ,' + name + ' \n' +
                         '\n' +
-                        'You havent update your process for the past 3 months. You are invited to update your process.\n' +
+                        'The update process for the device ' + device + ' '+ model +' in ' + datacenter + ' ' + location + ' is successfully finished.\n' +
                         '\n' +
-                        'Let us know if you run into a problem.\n' +
+                        'If you have further questions, please contact xyz.\n' +
                         '\n' +
                         'Best,\n' +
                         '\n' +

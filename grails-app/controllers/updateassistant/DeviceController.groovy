@@ -6,16 +6,51 @@ import static org.springframework.http.HttpStatus.*
 class DeviceController {
 
     DeviceService deviceService
+    UpdateProcessService updateProcessService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond deviceService.list(params), model:[deviceCount: deviceService.count()]
+
+        List<Device> deviceList = deviceService.list(params)
+
+        for(Device device : deviceList)
+        {
+            def processList = UpdateProcess.createCriteria()
+            UpdateProcess process = processList.get {
+                and {
+                    eq("device", device)
+                    eq("updateSuccess", true)
+                }
+                maxResults(1)
+                order("id", "desc")
+            }
+            if(process != null) {
+                println 'Results : ' + process.getLastVersion() != null ? process.getLastVersion() : ''
+                device.setInstalledOSVersion(process.getLastVersion())
+            }
+        }
+
+        respond deviceList, model:[deviceCount: deviceService.count()]
     }
 
     def show(Long id) {
-        respond deviceService.get(id)
+        def device = deviceService.get(id)
+        def processList = UpdateProcess.createCriteria()
+        UpdateProcess process = processList.get {
+            and {
+                eq("device", device)
+                eq("updateSuccess", true)
+            }
+            maxResults(1)
+            order("id", "desc")
+        }
+        if(process != null) {
+            device.setInstalledOSVersion(process.getLastVersion())
+        }
+
+        respond device
     }
 
     def create() {

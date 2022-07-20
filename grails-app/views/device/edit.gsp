@@ -119,7 +119,7 @@
                             </div>
                             <div class="fieldcontain required">
                                 <label for="">Update Processes<span class="required-indicator">*</span></label>
-                                <a href="/updateProcess/create?device.id=">Add UpdateProcess</a>
+                                <a href="/updateProcess/create?deviceId=${device.id}">Add UpdateProcess</a>
                             </div>
                         </fieldset>
                         <fieldset class="buttons">

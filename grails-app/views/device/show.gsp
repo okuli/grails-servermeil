@@ -73,6 +73,10 @@
                            <span id="name-label" class="property-label">Operating System</span>
                            <div class="property-value" aria-labelledby="name-label">${device.operatingSystem.name}</div>
                        </li>
+                       <li class="fieldcontain">
+                           <span id="name-label" class="property-label">Update Processes</span>
+                           <div class="property-value" aria-labelledby="name-label"><a href="/updateProcess/create?deviceId=${device.id}">Add UpdateProcess</a></div>
+                       </li>
                    </ol>
                     <g:form resource="${this.device}" method="DELETE">
                         <fieldset class="buttons">

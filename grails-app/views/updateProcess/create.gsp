@@ -6,6 +6,7 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'updateProcess.label', default: 'UpdateProcess')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <g:set var="deviceId" value="${request.getParameter("deviceId")}" />
     </head>
     <body>
     <div id="content" role="main">
@@ -38,7 +39,7 @@
                                <label for="">Device<span class="required-indicator">*</span></label>
                                <select id="device" name="device" required="">
                                     <g:each var="device" in="${Device.list()}">
-                                        <option value="${device.id}">${device.serialnumber}</option>
+                                        <option value="${device.id}" <g:if test="${''+device.id == ''+deviceId}">selected="selected"</g:if> >${device.serialnumber}</option>
                                     </g:each>
                                </select>
                             </div>
