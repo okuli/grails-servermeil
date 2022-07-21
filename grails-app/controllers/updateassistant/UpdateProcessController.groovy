@@ -139,7 +139,10 @@ class UpdateProcessController {
             def name = updateProcess.getContact().getFirstname() + " " + updateProcess.getContact().getLastname()
             def emailCC = updateProcess.getDevice().getsContact().getEmailadress()
             def device = updateProcess.getDevice().getInstalledOSVersion()
-            def model = updateProcess.getDevice().getModel().getModeName()
+            def model = ''
+            if(updateProcess.getDevice().getModel() != null)
+                model = updateProcess.getDevice().getModel().getModeName() != null ? updateProcess.getDevice().getModel().getModeName() : ''
+
             def location = updateProcess.getDevice().getLocation().getRackName()
             def datacenter = updateProcess.getDevice().getLocation().getDc().getName()
             println 'Email Process Start'

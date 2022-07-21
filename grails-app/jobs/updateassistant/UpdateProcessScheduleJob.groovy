@@ -37,7 +37,10 @@ class UpdateProcessScheduleJob {
         def name = process.getDevice().getpContact().getFirstname() + ' ' + process.getDevice().getpContact().getLastname()
         def emailCC = process.getDevice().getsContact().getEmailadress()
         def device = process.getDevice().getInstalledOSVersion()
-        def model = process.getDevice().getModel().getModeName()
+        def model = ''
+        if(process.getDevice().getModel() != null)
+            model = process.getDevice().getModel().getModeName() != null ? process.getDevice().getModel().getModeName() : ''
+
         def location = process.getDevice().getLocation().getRackName()
         def datacenter = process.getDevice().getLocation().getDc().getName()
         mailService.sendMail {
