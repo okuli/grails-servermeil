@@ -1,10 +1,8 @@
 package updateassistant
 
-import java.text.SimpleDateFormat
-
 class UpdateProcessScheduleJob {
     static triggers = {
-        //cron name: 'emailTriggerJob', cronExpression: "20 * * * * ?" //Every 20 second
+        cron name: 'emailTriggerJob', cronExpression: "20 * * * * ?" //Every 20 second
         // cron name: 'emailTriggerJob', cronExpression: "0 0 1 * * ?" //Every Day 1 am midnight
     }
 
@@ -15,19 +13,22 @@ class UpdateProcessScheduleJob {
         println 'Job Process Start!'
 
         def date = new Date()
-        def sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
 
         List<UpdateProcess> updateProcessList = updateProcessService.list(null)
         for(UpdateProcess process: updateProcessList)
         {
-            def difference = date.getTime() - process.getUpdateDate().getTime()
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(difference)
-            def monthDiff = cal.get(Calendar.MONTH)
-            if(monthDiff > 3 && !process.updateSuccess)
+            def days = daysBetween(process.getUpdateDate(), date)
+            if(days > 92 && !process.updateSuccess)
             {
                 sendEmail(process)
             }
+        }
+    }
+
+    static def daysBetween(def startDate, def endDate) {
+        use(groovy.time.TimeCategory) {
+            def duration = endDate - startDate
+            return duration.days
         }
     }
 

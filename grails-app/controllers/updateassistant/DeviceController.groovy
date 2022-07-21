@@ -8,8 +8,6 @@ class DeviceController {
     DeviceService deviceService
     UpdateProcessService updateProcessService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 
@@ -27,7 +25,6 @@ class DeviceController {
                 order("id", "desc")
             }
             if(process != null) {
-                println 'Results : ' + process.getLastVersion() != null ? process.getLastVersion() : ''
                 device.setInstalledOSVersion(process.getLastVersion())
             }
         }

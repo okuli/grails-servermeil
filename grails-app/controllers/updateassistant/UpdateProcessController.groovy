@@ -2,16 +2,12 @@ package updateassistant
 
 import grails.validation.ValidationException
 
-import java.text.SimpleDateFormat
-
 import static org.springframework.http.HttpStatus.*
 
 class UpdateProcessController {
 
     UpdateProcessService updateProcessService
     DeviceService deviceService
-
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -31,16 +27,20 @@ class UpdateProcessController {
 
         for(UpdateProcess process: updateProcessList)
         {
-            def difference = date.getTime() - process.getUpdateDate().getTime()
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(difference)
-            def monthDiff = cal.get(Calendar.MONTH)
-            if(monthDiff > 3 && !process.updateSuccess)
+            def days = daysBetween(process.getUpdateDate(), date)
+            if(days > 92 && !process.updateSuccess)
             {
                 process.setIsNotUpdated(true)
             }
         }
         respond updateProcessList, model:[updateProcessCount: updateProcessService.count()]
+    }
+
+    static def daysBetween(def startDate, def endDate) {
+        use(groovy.time.TimeCategory) {
+            def duration = endDate - startDate
+            return duration.days
+        }
     }
 
     def show(Long id) {
