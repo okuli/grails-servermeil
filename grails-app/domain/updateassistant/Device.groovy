@@ -7,7 +7,6 @@ class Device {
     Types typeOfDevice
     Manufacturer manufacturer
     OperatingSystem operatingSystem
-    String OSVersion
     String installedOSVersion
     String serialnumber
     Contact pContact

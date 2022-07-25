@@ -16,14 +16,19 @@ class DeviceController {
         for(Device device : deviceList)
         {
             def processList = UpdateProcess.createCriteria()
+            println "ProcessList : " + processList
             UpdateProcess process = processList.get {
                 and {
                     eq("device", device)
                     eq("updateSuccess", true)
                 }
                 maxResults(1)
-                order("id", "desc")
+                and{
+                    order("updateDate", "desc")
+                    order("id", "desc")
+                }
             }
+            println "Process Final : " + process
             if(process != null) {
                 device.setInstalledOSVersion(process.getLastVersion())
             }

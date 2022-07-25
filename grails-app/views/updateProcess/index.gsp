@@ -68,7 +68,7 @@
                     <table id="updateProcessTable">
                     <thead>
                         <tr>
-                            <th class="sortable ${sortName == 'id' ? 'sorted':''} ${sortName == 'id' ? order : ''}"><a href="/updateProcess/index?sort=id&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">ID</a></th>
+                            <th class="sortable ${sortName == 'id' ? 'sorted':''} ${sortName == 'id' ? order : ''}"><g:link action="index" controller="updateProcess" params="${[sort:'id',max:10,order:order=='asc'?'desc':'asc']}">ID</g:link></th>
                             <th class="">Device Manufacturer</th>
                             <th class="">Device Model</th>
                             <th class="">Installed Version</th>
@@ -83,7 +83,7 @@
                     <tbody>
                         <g:each var="updateProcess" status="i" in="${updateProcessList}">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'} ${updateProcess.isNotUpdated ? 'notupdated' : ''}">
-                                <td><a href="/updateProcess/show/${updateProcess.id}">${updateProcess.id}</a></td>
+                                <td><g:link action="show" id='${updateProcess.id}'>${updateProcess.id}</g:link></td>
                                 <td>${updateProcess.device.manufacturer.name}</td>
                                 <td>${updateProcess.device.model != null ? updateProcess.device.model.modeName : ''}</td>
                                 <td>${updateProcess.currentVersion}</td>
@@ -92,7 +92,7 @@
                                 <td><g:formatDate format="yyyy-MM-dd" date="${updateProcess.updateDate}" /></td>
                                 <td>${updateProcess.updateSuccess ? 'Yes':'No'}</td>
                                 <td>${updateProcess.contact.firstname}/${updateProcess.contact.lastname}</td>
-                                <td><a href="/updateProcess/edit/${updateProcess.id}"><g:img dir="images" file="/skin/database_edit.png" /></a></td>
+                                <td><g:link action="edit" id='${updateProcess.id}'><g:img dir="images" file="/skin/database_edit.png" /></g:link></td>
                             </tr>
                         </g:each>
                     </tbody>

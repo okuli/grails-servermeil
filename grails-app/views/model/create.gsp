@@ -53,6 +53,16 @@
                             </div>
 
                             <div class="fieldcontain required">
+                                <label for="">Support URL<span class="required-indicator">*</span></label>
+                                <input type="text" id="supportURL" name="supportURL" required="" placeholder="">
+                            </div>
+
+                            <div class="fieldcontain required">
+                                <label for="">TicketHowto<span class="required-indicator">*</span></label>
+                                <input type="text" id="ticketHowto" name="ticketHowto" required="" placeholder="">
+                            </div>
+
+                            <div class="fieldcontain required">
                                 <label for="">Comment</label>
                                 <g:textArea name="comment" id="comment" rows="10" cols="40"/>
                             </div>

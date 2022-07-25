@@ -38,6 +38,14 @@
                              <div class="property-value" aria-labelledby="name-label">${model.updateURL}</div>
                          </li>
                         <li class="fieldcontain">
+                             <span id="name-label" class="property-label">Support URL</span>
+                             <div class="property-value" aria-labelledby="name-label">${model.supportURL}</div>
+                        </li>
+                        <li class="fieldcontain">
+                             <span id="name-label" class="property-label">TicketHowto</span>
+                             <div class="property-value" aria-labelledby="name-label">${model.ticketHowto}</div>
+                        </li>
+                        <li class="fieldcontain">
                             <span id="name-label" class="property-label">Comment</span>
                             <div class="property-value" aria-labelledby="name-label">${model.comment}</div>
                         </li>

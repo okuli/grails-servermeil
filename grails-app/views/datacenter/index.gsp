@@ -27,15 +27,15 @@
                     <table>
                     <thead>
                         <tr>
-                            <th class="sortable"><a href="/datacenter/index?sort=name&amp;max=10&amp;order=asc">Name</a></th>
-                            <th class="sortable"><a href="/datacenter/index?sort=address&amp;max=10&amp;order=asc">Address</a></th>
+                            <th class="sortable"><g:link action="index" controller="datacenter" params="[sort:'name',max:10,order:'asc']">Name</g:link></th>
+                            <th class="">Address</th>
                         </tr>
                     </thead>
                     <tbody>
                         <g:each var="datacenter" status="i" in="${datacenterList}">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <td><a href="/datacenter/show/${datacenter.id}">${datacenter.name}</a></td>
-                                <td><a href="/address/show/${datacenter.address.id}">${datacenter.address.name}</a></td>
+                                <td><g:link action="show" id='${datacenter.id}'>${datacenter.name}</g:link></td>
+                                <td><g:link action="show" controller="address" id='${datacenter.address.id}'>${datacenter.address.name}</g:link></td>
                             </tr>
                         </g:each>
                     </tbody>

@@ -82,8 +82,12 @@
                                </select>
                             </div>
                             <div class="fieldcontain required">
-                                <label for="">OS Version<span class="required-indicator">*</span></label>
-                                <input type="text" id="OSVersion" value="${device.OSVersion}" name="OSVersion" required="" placeholder="">
+                               <label for="">Operating System<span class="required-indicator">*</span></label>
+                               <select id="operatingSystem" name="operatingSystem" required="">
+                                    <g:each var="operatingSystem" in="${OperatingSystem.list()}">
+                                        <option value="${operatingSystem.id}" <g:if test="${device.operatingSystem.id == operatingSystem.id}">selected="selected"</g:if>>${operatingSystem.name}</option>
+                                    </g:each>
+                               </select>
                             </div>
                             <div class="fieldcontain required">
                                 <label for="">Installed OS Version<span class="required-indicator">*</span></label>
@@ -109,17 +113,10 @@
                                 <label for="">Serial Number<span class="required-indicator">*</span></label>
                                 <input type="text" id="serialnumber" value="${device.serialnumber}" name="serialnumber" required="" placeholder="">
                             </div>
-                            <div class="fieldcontain required">
-                               <label for="">Operating System<span class="required-indicator">*</span></label>
-                               <select id="operatingSystem" name="operatingSystem" required="">
-                                    <g:each var="operatingSystem" in="${OperatingSystem.list()}">
-                                        <option value="${operatingSystem.id}" <g:if test="${device.operatingSystem.id == operatingSystem.id}">selected="selected"</g:if>>${operatingSystem.name}</option>
-                                    </g:each>
-                               </select>
-                            </div>
+
                             <div class="fieldcontain required">
                                 <label for="">Update Processes<span class="required-indicator">*</span></label>
-                                <a href="/updateProcess/create?deviceId=${device.id}">Add UpdateProcess</a>
+                                <g:link action="create" controller="updateProcess" params="${[deviceId:device.id]}">Add UpdateProcess</g:link>
                             </div>
                         </fieldset>
                         <fieldset class="buttons">

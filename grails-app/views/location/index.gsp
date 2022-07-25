@@ -29,16 +29,16 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="sortable ${sortName == 'rackName' ? 'sorted':''} ${sortName == 'rackName' ? order : ''}"><a href="/location/index?sort=rackName&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">Rack Name</a></th>
-                                <th class="sortable ${sortName == 'dc' ? 'sorted':''} ${sortName == 'dc' ? order : ''}"><a href="/location/index?sort=dc&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">Data Center</a></th>
-                                <th class="sortable ${sortName == 'rackHeight' ? 'sorted':''} ${sortName == 'rackHeight' ? order : ''}"><a href="/location/index?sort=rackHeight&amp;max=10&amp;order=${order == 'asc' ? 'desc':'asc'}">Rack Height</a></th>
+                                <th class="sortable ${sortName == 'rackName' ? 'sorted':''} ${sortName == 'rackName' ? order : ''}"><g:link action="index" controller="location" params="${[sort:'rackName',max:10,order:order=='asc'?'desc':'asc']}">Rack Name</g:link></th>
+                                <th class="">Data Center</th>
+                                <th class="">Rack Height</th>
                             </tr>
                         </thead>
                         <tbody>
                             <g:each var="location" status="i" in="${locationList}">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                    <td><a href="/location/show/${location.id}">${location.rackName}</a></td>
-                                    <td><a href="/datacenter/show/${location.dc.id}">${location.dc.name}</a></td>
+                                    <td><g:link action="show" id='${location.id}'>${location.rackName}</g:link></td>
+                                    <td><g:link action="show" controller="datacenter" id='${location.dc.id}'>${location.dc.name}</g:link></td>
                                     <td>${location.rackHeight}</td>
                                 </tr>
                             </g:each>

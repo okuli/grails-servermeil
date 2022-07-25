@@ -4,6 +4,7 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'address.label', default: 'Address')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <g:set var="order" value="${request.getParameter("order")}" />
     </head>
     <body>
     <g:render template="/common/header" />
@@ -27,17 +28,17 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="sortable"><a href="/address/index?sort=name&amp;max=10&amp;order=asc">Name</a></th>
-                                <th class="sortable"><a href="/address/index?sort=city&amp;max=10&amp;order=asc">City</a></th>
-                                <th class="sortable"><a href="/address/index?sort=street&amp;max=10&amp;order=asc">Street</a></th>
-                                <th class="sortable"><a href="/address/index?sort=zipcode&amp;max=10&amp;order=asc">Zipcode</a></th>
+                                <th class="sortable sorted order}"><g:link action="index" controller="address" params="${[sort:'name',max:10,order:order=='asc'?'desc':'asc']}">Name</g:link></th>
+                                <th class="">City</th>
+                                <th class="">Street</th>
+                                <th class="">Zipcode</th>
                             </tr>
                         </thead>
                         <tbody>
                             <g:each var="address" status="i" in="${addressList}">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                    <td><a href="/address/show/${address.id}">${address.name}</a></td>
-                                    <td><a href="/city/show/${address.city.id}">${address.city.name}</a></td>
+                                    <td><g:link action="show" id='${address.id}'>${address.name}</g:link></td>
+                                    <td><g:link action="show" controller="city" id='${address.city.id}'>${address.city.name}</g:link></td>
                                     <td>${address.street}</td>
                                     <td>${address.zipcode}</td>
                                 </tr>

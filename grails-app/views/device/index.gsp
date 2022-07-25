@@ -44,16 +44,16 @@
                     <tbody>
                         <g:each var="device" status="i" in="${deviceList}">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <td><a href="/device/show/${device.id}">${device.id}</a></td>
-                                <td><a href="/customer/show/${device.customer.id}">${device.customer.name}</a></td>
-                                <td><a href="/manufacturer/show/${device.manufacturer.id}">${device.manufacturer.name}</a></td>
+                                <td><g:link action="show" id="${device.id}">${device.id}</g:link></td>
+                                <td><g:link action="show" controller="customer" id="${device.customer.id}">${device.customer.name}</g:link></td>
+                                <td><g:link action="show" controller="manufacturer" id="${device.manufacturer.id}">${device.manufacturer.name}</g:link></td>
                                 <td>${device.model != null? device.model.modeName : ''}</td>
-                                <td><a href="/types/show/${device.typeOfDevice.id}">${device.typeOfDevice.name}</a></td>
-                                <td><a href="/location/show/${device.location.id}">${device.location.rackName}</a></td>
-                                <td>${device.OSVersion}</td>
+                                <td><g:link action="show" controller="types" id="${device.typeOfDevice.id}">${device.typeOfDevice.name}</g:link></td>
+                                <td><g:link action="show" controller="location" id="${device.location.id}">${device.location.rackName}</g:link></td>
+                                <td>${device.operatingSystem.name}</td>
                                 <td>${device.installedOSVersion}</td>
-                                <td><a href="/contact/show/${device.pContact.id}">${device.pContact.firstname}/${device.pContact.lastname}</a></td>
-                                <td><a href="/device/edit/${device.id}"><g:img dir="images" file="/skin/database_edit.png" /></a></td>
+                                <td><g:link action="show" controller="contact" id="${device.pContact.id}">${device.pContact.firstname}/${device.pContact.lastname}</g:link></td>
+                                <td><g:link action="edit" id="${device.id}"><g:img dir="images" file="/skin/database_edit.png" /></g:link></td>
                             </tr>
                         </g:each>
                     </tbody>

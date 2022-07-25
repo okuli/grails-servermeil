@@ -18,7 +18,11 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/#"><asset:image src="header_logo.png" alt="Header Logo" style="width:200px"/></a>
+    <%
+        String env = grails.util.Environment.current.name
+        String url = (env == "development" ? "/#" : "/servermeile/")
+    %>
+        <a class="navbar-brand" href='${url}'><asset:image src="header_logo.png" alt="Header Logo" style="width:200px"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

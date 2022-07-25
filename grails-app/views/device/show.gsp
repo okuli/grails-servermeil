@@ -50,9 +50,9 @@
                             <div class="property-value" aria-labelledby="name-label">${device.location.rackName}</div>
                         </li>
                        <li class="fieldcontain">
-                            <span id="name-label" class="property-label">OS Version</span>
-                            <div class="property-value" aria-labelledby="name-label">${device.OSVersion}</div>
-                         </li>
+                           <span id="name-label" class="property-label">Operating System</span>
+                           <div class="property-value" aria-labelledby="name-label">${device.operatingSystem.name}</div>
+                       </li>
                        <li class="fieldcontain">
                              <span id="name-label" class="property-label">Installed OS Version</span>
                              <div class="property-value" aria-labelledby="name-label">${device.installedOSVersion}</div>
@@ -69,13 +69,10 @@
                             <span id="name-label" class="property-label">Serial Number</span>
                             <div class="property-value" aria-labelledby="name-label">${device.serialnumber}</div>
                        </li>
-                       <li class="fieldcontain">
-                           <span id="name-label" class="property-label">Operating System</span>
-                           <div class="property-value" aria-labelledby="name-label">${device.operatingSystem.name}</div>
-                       </li>
+
                        <li class="fieldcontain">
                            <span id="name-label" class="property-label">Update Processes</span>
-                           <div class="property-value" aria-labelledby="name-label"><a href="/updateProcess/create?deviceId=${device.id}">Add UpdateProcess</a></div>
+                           <div class="property-value" aria-labelledby="name-label"><g:link action="create" controller="updateProcess" params="${[deviceId:device.id]}">Add UpdateProcess</g:link></div>
                        </li>
                    </ol>
                     <g:form resource="${this.device}" method="DELETE">

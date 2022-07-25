@@ -27,18 +27,22 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="sortable"><a href="/model/index?sort=manufacturer&amp;max=10&amp;order=asc">Manufacturer</a></th>
-                                <th class="sortable"><a href="/model/index?sort=modeName&amp;max=10&amp;order=asc">Model Name</a></th>
+                                <th class="sortable">Manufacturer</th>
+                                <th class="sortable">Model Name</th>
                                 <th class="">Update URL</a></th>
+                                <th class="">Support URL</a></th>
+                                <th class="">TicketHowto</a></th>
                                 <th class="">Comment</th>
                             </tr>
                         </thead>
                         <tbody>
                             <g:each var="model" status="i" in="${modelList}">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                    <td><a href="/manufacturer/show/${model.manufacturer.id}">${model.manufacturer.name}</a></td>
-                                    <td><a href="/model/show/${model.id}">${model.modeName}</a></td>
+                                    <td><g:link action="show" controller="manufacturer" id='${model.manufacturer.id}'>${model.manufacturer.name}</g:link></td>
+                                    <td><g:link action="show" id='${model.id}'>${model.modeName}</g:link></td>
                                     <td>${model.updateURL}</td>
+                                    <td>${model.supportURL}</td>
+                                    <td>${model.ticketHowto}</td>
                                     <td>${model.comment}</td>
                                 </tr>
                             </g:each>

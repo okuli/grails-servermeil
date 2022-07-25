@@ -53,7 +53,15 @@
                                 <label for="">Update URL<span class="required-indicator">*</span></label>
                                 <input type="text" id="updateURL" value="${model.updateURL}" name="updateURL" required="" placeholder="">
                             </div>
+                            <div class="fieldcontain required">
+                                <label for="">Support URL<span class="required-indicator">*</span></label>
+                                <input type="text" id="supportURL" name="supportURL" value="${supportURL}" required="" placeholder="">
+                            </div>
 
+                            <div class="fieldcontain required">
+                                <label for="">TicketHowto<span class="required-indicator">*</span></label>
+                                <input type="text" id="ticketHowto" name="ticketHowto" value="${ticketHowto}"  required="" placeholder="">
+                            </div>
                             <div class="fieldcontain required">
                                 <label for="">Comment</label>
                                 <g:textArea name="comment" id="comment" value="${model.comment}" rows="10" cols="40"/>
